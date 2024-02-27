@@ -7,10 +7,11 @@ from libcpp.vector cimport vector
 from libcpp.map cimport map
 from libcpp.string cimport string
 from libcpp cimport bool
+from libcpp.memory cimport make_shared, shared_ptr
 
 cdef extern from "OpenDriveMap.h" namespace "odr":
     cdef cppclass OpenDriveMap:
-        OpenDriveMap(const string& xodr_file, const bool center_map = false, const bool with_road_objects = true, const bool with_lateral_profile = true, const bool with_lane_height = true, const bool abs_z_for_for_local_road_obj_outline = false, const bool fix_spiral_edge_cases = true, const bool with_road_signals = true)
+        OpenDriveMap(const string& xodr_file, const bool center_map, const bool with_road_objects, const bool with_lateral_profile, const bool with_lane_height, const bool abs_z_for_for_local_road_obj_outline, const bool fix_spiral_edge_cases, const bool with_road_signals)
 
         vector[Road] get_roads() const
         vector[Junction] get_junctions() const
@@ -26,3 +27,6 @@ cdef extern from "OpenDriveMap.h" namespace "odr":
 
         map[string, Road] id_to_road
         map[string, Junction] id_to_junction
+
+cdef class PyOpenDriveMap:
+    cdef shared_ptr[OpenDriveMap] c_self

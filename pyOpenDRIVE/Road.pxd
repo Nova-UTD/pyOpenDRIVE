@@ -8,10 +8,60 @@ from libcpp.map cimport map
 from libcpp.set cimport set
 from libcpp.string cimport string
 from libcpp cimport bool
+from libcpp.memory cimport make_shared, shared_ptr
+
+#cdef extern from "<array>" namespace "std":
+#    cdef cppclass array[T, Dim]
+
+cdef extern from "<cstdint>" namespace "std":
+    cdef cppclass uint32_t
+
+cdef extern from "Math.hpp" namespace "odr":
+    cdef cppclass Vec3D
 
 cdef extern from "Road.h" namespace "odr":
+    cdef cppclass Crossfall:
+        enum Side:
+            Side_Both,
+            Side_Left,
+            Side_Right
+
+        double get_crossfall(const double s, const bool on_left_side) const
+        map[double, Side] sides
+
+    cdef cppclass RoadLink:
+        enum ContactPoint:
+            ContactPoint_None,
+            ContactPoint_Start,
+            ContactPoint_End
+
+        enum Type:
+            Type_None,
+            Type_Road,
+            Type_Junction
+
+        RoadLink()
+        RoadLink(string id, Type type, ContactPoint contact_point)
+
+        string id
+        Type type
+        ContactPoint contact_point
+    
+    cdef cppclass RoadNeighbor:
+        RoadNeighbor(string id, string side, string direction)
+
+        string id
+        string side
+        string direction
+
+    cdef cppclass SpeedRecord:
+        SpeedRecord(string max, string unit)
+
+        string max
+        string unit
+
     cdef cppclass Road:
-        Road(string id, double length, string junction, string name, bool left_hand_traffic = false)
+        Road(string id, double length, string junction, string name, bool left_hand_traffic) except +
 
         vector[LaneSection] get_lanesections() const
         vector[RoadObject]  get_road_objects() const
@@ -61,3 +111,6 @@ cdef extern from "Road.h" namespace "odr":
         map[double, SpeedRecord]     s_to_speed
         map[string, RoadObject] id_to_object
         map[string, RoadSignal] id_to_signal
+
+cdef class PyRoad:
+    cdef shared_ptr[Road] c_self

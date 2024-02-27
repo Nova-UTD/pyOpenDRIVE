@@ -11,7 +11,7 @@ from libcpp.memory cimport make_shared, shared_ptr
 
 cdef extern from "OpenDriveMap.h" namespace "odr":
     cdef cppclass OpenDriveMap:
-        OpenDriveMap(const string& xodr_file, const bool center_map, const bool with_road_objects, const bool with_lateral_profile, const bool with_lane_height, const bool abs_z_for_for_local_road_obj_outline, const bool fix_spiral_edge_cases, const bool with_road_signals)
+        OpenDriveMap(const string& xodr_file, const bool center_map, const bool with_road_objects, const bool with_lateral_profile, const bool with_lane_height, const bool abs_z_for_for_local_road_obj_outline, const bool fix_spiral_edge_cases, const bool with_road_signals) except +
 
         vector[Road] get_roads() const
         vector[Junction] get_junctions() const

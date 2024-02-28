@@ -10,7 +10,7 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
-from pyOpenDrive.Geometries.CubicSpline cimport CubicSpline
+from pyOpenDrive.CubicSpline cimport CubicSpline
 from pyOpenDrive.RoadMark cimport RoadMark, RoadMarkGroup
 
 cdef extern from "Lane.h" namespace "odr":

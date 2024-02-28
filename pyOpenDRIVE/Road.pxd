@@ -10,14 +10,15 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
-#cdef extern from "<array>" namespace "std":
-#    cdef cppclass array[T, Dim]
-
 cdef extern from "<cstdint>" namespace "std":
     cdef cppclass uint32_t
 
-cdef extern from "Math.hpp" namespace "odr":
-    cdef cppclass Vec3D
+from pyOpenDrive.Lane cimport Lane
+from pyOpenDrive.LaneSection cimport LaneSection
+from pyOpenDrive.CubicSpline cimport CubicSpline
+from pyOpenDrive.Array cimport array
+from pyOpenDrive.Mesh cimport Mesh3D
+from pyOpenDrive.RoadMark cimport RoadMark
 
 cdef extern from "Road.h" namespace "odr":
     cdef cppclass Crossfall:
@@ -59,6 +60,13 @@ cdef extern from "Road.h" namespace "odr":
 
         string max
         string unit
+
+    ctypedef int dim_3 "3"
+    ctypedef int dim_2 "2"
+
+    ctypedef array[double, dim_2] Vec2D
+    ctypedef array[double, dim_3] Vec3D
+    ctypedef vector[Vec3D] Line3D
 
     cdef cppclass Road:
         Road(string id, double length, string junction, string name, bool left_hand_traffic) except +

@@ -2,6 +2,6 @@
 
 from pyOpenDrive cimport XmlNode
 
-cdef class PyXmlNode:
+cdef class PyCubicSpline:
     def __cinit__(self):
-        self.c_self = make_shared[XmlNode]()
+        self.c_self = make_shared[CubicSpline]()

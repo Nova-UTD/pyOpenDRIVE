@@ -2,5 +2,5 @@ from setuptools import setup
 
 from Cython.Build import cythonize
 
-#setup(ext_modules=cythonize(["PyOpenDRIVE/*.pyx"]))
-setup(ext_modules=cythonize(["PyOpenDRIVE/Lane.pyx"]))
+#setup(ext_modules=cythonize(["pyOpenDRIVE/*.pyx"]))
+setup(ext_modules=cythonize(["pyOpenDRIVE/Lane.pyx"]), include_dirs=["pyOpenDRIVE/include"])

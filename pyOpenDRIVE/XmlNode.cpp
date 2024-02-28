@@ -4,19 +4,18 @@
 {
     "distutils": {
         "depends": [
-            "pyOpenDRIVE\\RoadMark.h",
-            "src\\RoadMark.cpp"
+            "pyOpenDRIVE\\XmlNode.h"
         ],
         "include_dirs": [
             "pyOpenDRIVE"
         ],
         "language": "c++",
-        "name": "pyOpenDRIVE.RoadMark",
+        "name": "pyOpenDRIVE.XmlNode",
         "sources": [
-            "pyOpenDRIVE/RoadMark.pyx"
+            "pyOpenDRIVE/XmlNode.pyx"
         ]
     },
-    "module_name": "pyOpenDRIVE.RoadMark"
+    "module_name": "pyOpenDRIVE.XmlNode"
 }
 END: Cython Metadata */
 
@@ -1213,10 +1212,9 @@ static CYTHON_INLINE float __PYX_NAN() {
     #define __PYX_EXTERN_C extern "C++"
 #endif
 
-#define __PYX_HAVE__pyOpenDRIVE__RoadMark
-#define __PYX_HAVE_API__pyOpenDRIVE__RoadMark
+#define __PYX_HAVE__pyOpenDRIVE__XmlNode
+#define __PYX_HAVE_API__pyOpenDRIVE__XmlNode
 /* Early includes */
-#include "../src/RoadMark.cpp"
 #include "pugixml/pugixml.cpp"
 #include "ios"
 #include "new"
@@ -1241,7 +1239,8 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include <string.h>
 #include <string>
 #include <memory>
-#include "RoadMark.h"
+#include "pugixml/pugixml.hpp"
+#include "XmlNode.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -1508,7 +1507,7 @@ static const char *__pyx_filename;
 
 static const char *__pyx_f[] = {
   "<stringsource>",
-  "pyOpenDRIVE\\\\RoadMark.pyx",
+  "pyOpenDRIVE\\\\XmlNode.pyx",
 };
 /* #### Code section: utility_code_proto_before_types ### */
 /* ForceInitThreads.proto */
@@ -1521,17 +1520,17 @@ static const char *__pyx_f[] = {
 /* #### Code section: type_declarations ### */
 
 /*--- Type declarations ---*/
-struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark;
+struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode;
 
-/* "pyOpenDRIVE/RoadMark.pxd":67
- *         string type
+/* "pyOpenDRIVE/XmlNode.pxd":20
+ *         xml_node xml_node
  * 
- * cdef class PyRoadMark:             # <<<<<<<<<<<<<<
- *     cdef shared_ptr[RoadMark] c_self
+ * cdef class PyXmlNode:             # <<<<<<<<<<<<<<
+ *     cdef shared_ptr[XmlNode] c_self
  */
-struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark {
+struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode {
   PyObject_HEAD
-  std::shared_ptr<odr::RoadMark>  c_self;
+  std::shared_ptr<odr::XmlNode>  c_self;
 };
 
 /* #### Code section: utility_code_proto ### */
@@ -1748,14 +1747,8 @@ static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int 
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
 
-/* RaiseDoubleKeywords.proto */
-static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
-
-/* ParseKeywords.proto */
-static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject *const *kwvalues,
-    PyObject **argnames[],
-    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,
-    const char* function_name);
+/* KeywordStringCheck.proto */
+static int __Pyx_CheckKeywordStrings(PyObject *kw, const char* function_name, int kw_allowed);
 
 /* MoveIfSupported.proto */
 #if CYTHON_USE_CPP_STD_MOVE
@@ -1765,11 +1758,17 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject *const *kwvalues
   #define __PYX_STD_MOVE_IF_SUPPORTED(x) x
 #endif
 
-/* KeywordStringCheck.proto */
-static int __Pyx_CheckKeywordStrings(PyObject *kw, const char* function_name, int kw_allowed);
-
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
+
+/* RaiseDoubleKeywords.proto */
+static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
+
+/* ParseKeywords.proto */
+static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject *const *kwvalues,
+    PyObject **argnames[],
+    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,
+    const char* function_name);
 
 /* IncludeStructmemberH.proto */
 #include <structmember.h>
@@ -2066,11 +2065,6 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 /* None.proto */
 #include <new>
 
-/* GCCDiagnostics.proto */
-#if !defined(__INTEL_COMPILER) && defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
-#define __Pyx_HAS_GCC_DIAGNOSTIC
-#endif
-
 /* CppExceptionConversion.proto */
 #ifndef __Pyx_CppExn2PyErr
 #include <new>
@@ -2113,9 +2107,6 @@ static void __Pyx_CppExn2PyErr() {
 }
 #endif
 
-/* CIntFromPy.proto */
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
-
 /* FormatTypeName.proto */
 #if CYTHON_COMPILING_IN_LIMITED_API
 typedef PyObject *__Pyx_TypeName;
@@ -2129,11 +2120,19 @@ typedef const char *__Pyx_TypeName;
 #define __Pyx_DECREF_TypeName(obj)
 #endif
 
+/* GCCDiagnostics.proto */
+#if !defined(__INTEL_COMPILER) && defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
+#define __Pyx_HAS_GCC_DIAGNOSTIC
+#endif
+
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
+
+/* CIntFromPy.proto */
+static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 /* FastTypeChecks.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
@@ -2179,15 +2178,14 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from "pyOpenDrive" */
 
-/* Module declarations from "pyOpenDRIVE.RoadMark" */
-static std::string __pyx_convert_string_from_py_std__in_string(PyObject *); /*proto*/
+/* Module declarations from "pyOpenDRIVE.XmlNode" */
 /* #### Code section: typeinfo ### */
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "pyOpenDRIVE.RoadMark"
-extern int __pyx_module_is_main_pyOpenDRIVE__RoadMark;
-int __pyx_module_is_main_pyOpenDRIVE__RoadMark = 0;
+#define __Pyx_MODULE_NAME "pyOpenDRIVE.XmlNode"
+extern int __pyx_module_is_main_pyOpenDRIVE__XmlNode;
+int __pyx_module_is_main_pyOpenDRIVE__XmlNode = 0;
 
-/* Implementation of "pyOpenDRIVE.RoadMark" */
+/* Implementation of "pyOpenDRIVE.XmlNode" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_TypeError;
 /* #### Code section: string_decls ### */
@@ -2197,40 +2195,31 @@ static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_self[] = "self";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_type[] = "type";
-static const char __pyx_k_s_end[] = "s_end";
-static const char __pyx_k_width[] = "width";
 static const char __pyx_k_enable[] = "enable";
 static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_disable[] = "disable";
-static const char __pyx_k_lane_id[] = "lane_id";
-static const char __pyx_k_road_id[] = "road_id";
-static const char __pyx_k_s_start[] = "s_start";
 static const char __pyx_k_getstate[] = "__getstate__";
-static const char __pyx_k_group_s0[] = "group_s0";
 static const char __pyx_k_setstate[] = "__setstate__";
-static const char __pyx_k_t_offset[] = "t_offset";
+static const char __pyx_k_PyXmlNode[] = "PyXmlNode";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_isenabled[] = "isenabled";
 static const char __pyx_k_pyx_state[] = "__pyx_state";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
-static const char __pyx_k_PyRoadMark[] = "PyRoadMark";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_stringsource[] = "<stringsource>";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
-static const char __pyx_k_lanesection_s0[] = "lanesection_s0";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_pyOpenDRIVE_RoadMark[] = "pyOpenDRIVE.RoadMark";
-static const char __pyx_k_PyRoadMark___reduce_cython[] = "PyRoadMark.__reduce_cython__";
-static const char __pyx_k_PyRoadMark___setstate_cython[] = "PyRoadMark.__setstate_cython__";
+static const char __pyx_k_pyOpenDRIVE_XmlNode[] = "pyOpenDRIVE.XmlNode";
+static const char __pyx_k_PyXmlNode___reduce_cython[] = "PyXmlNode.__reduce_cython__";
+static const char __pyx_k_PyXmlNode___setstate_cython[] = "PyXmlNode.__setstate_cython__";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 /* #### Code section: decls ### */
-static int __pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark___cinit__(struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *__pyx_v_self, std::string __pyx_v_road_id, double __pyx_v_lanesection_s0, int __pyx_v_lane_id, double __pyx_v_group_s0, double __pyx_v_s_start, double __pyx_v_s_end, double __pyx_v_t_offset, double __pyx_v_width, std::string __pyx_v_type); /* proto */
-static PyObject *__pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_tp_new_11pyOpenDRIVE_8RoadMark_PyRoadMark(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static int __pyx_pf_11pyOpenDRIVE_7XmlNode_9PyXmlNode___cinit__(struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11pyOpenDRIVE_7XmlNode_9PyXmlNode_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11pyOpenDRIVE_7XmlNode_9PyXmlNode_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_tp_new_11pyOpenDRIVE_7XmlNode_PyXmlNode(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
 typedef struct {
@@ -2277,12 +2266,12 @@ typedef struct {
   #if CYTHON_USE_MODULE_STATE
   #endif
   #if CYTHON_USE_MODULE_STATE
-  PyObject *__pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark;
+  PyObject *__pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode;
   #endif
-  PyTypeObject *__pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark;
-  PyObject *__pyx_n_s_PyRoadMark;
-  PyObject *__pyx_n_s_PyRoadMark___reduce_cython;
-  PyObject *__pyx_n_s_PyRoadMark___setstate_cython;
+  PyTypeObject *__pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode;
+  PyObject *__pyx_n_s_PyXmlNode;
+  PyObject *__pyx_n_s_PyXmlNode___reduce_cython;
+  PyObject *__pyx_n_s_PyXmlNode___setstate_cython;
   PyObject *__pyx_n_s_TypeError;
   PyObject *__pyx_n_s__5;
   PyObject *__pyx_n_s_asyncio_coroutines;
@@ -2291,30 +2280,21 @@ typedef struct {
   PyObject *__pyx_kp_u_enable;
   PyObject *__pyx_kp_u_gc;
   PyObject *__pyx_n_s_getstate;
-  PyObject *__pyx_n_s_group_s0;
   PyObject *__pyx_n_s_is_coroutine;
   PyObject *__pyx_kp_u_isenabled;
-  PyObject *__pyx_n_s_lane_id;
-  PyObject *__pyx_n_s_lanesection_s0;
   PyObject *__pyx_n_s_main;
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
-  PyObject *__pyx_n_s_pyOpenDRIVE_RoadMark;
+  PyObject *__pyx_n_s_pyOpenDRIVE_XmlNode;
   PyObject *__pyx_n_s_pyx_state;
   PyObject *__pyx_n_s_reduce;
   PyObject *__pyx_n_s_reduce_cython;
   PyObject *__pyx_n_s_reduce_ex;
-  PyObject *__pyx_n_s_road_id;
-  PyObject *__pyx_n_s_s_end;
-  PyObject *__pyx_n_s_s_start;
   PyObject *__pyx_n_s_self;
   PyObject *__pyx_n_s_setstate;
   PyObject *__pyx_n_s_setstate_cython;
   PyObject *__pyx_kp_s_stringsource;
-  PyObject *__pyx_n_s_t_offset;
   PyObject *__pyx_n_s_test;
-  PyObject *__pyx_n_s_type;
-  PyObject *__pyx_n_s_width;
   PyObject *__pyx_tuple_;
   PyObject *__pyx_tuple__3;
   PyObject *__pyx_codeobj__2;
@@ -2361,11 +2341,11 @@ static int __pyx_m_clear(PyObject *m) {
   #ifdef __Pyx_FusedFunction_USED
   Py_CLEAR(clear_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_CLEAR(clear_module_state->__pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark);
-  Py_CLEAR(clear_module_state->__pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark);
-  Py_CLEAR(clear_module_state->__pyx_n_s_PyRoadMark);
-  Py_CLEAR(clear_module_state->__pyx_n_s_PyRoadMark___reduce_cython);
-  Py_CLEAR(clear_module_state->__pyx_n_s_PyRoadMark___setstate_cython);
+  Py_CLEAR(clear_module_state->__pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode);
+  Py_CLEAR(clear_module_state->__pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode);
+  Py_CLEAR(clear_module_state->__pyx_n_s_PyXmlNode);
+  Py_CLEAR(clear_module_state->__pyx_n_s_PyXmlNode___reduce_cython);
+  Py_CLEAR(clear_module_state->__pyx_n_s_PyXmlNode___setstate_cython);
   Py_CLEAR(clear_module_state->__pyx_n_s_TypeError);
   Py_CLEAR(clear_module_state->__pyx_n_s__5);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
@@ -2374,30 +2354,21 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_enable);
   Py_CLEAR(clear_module_state->__pyx_kp_u_gc);
   Py_CLEAR(clear_module_state->__pyx_n_s_getstate);
-  Py_CLEAR(clear_module_state->__pyx_n_s_group_s0);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
   Py_CLEAR(clear_module_state->__pyx_kp_u_isenabled);
-  Py_CLEAR(clear_module_state->__pyx_n_s_lane_id);
-  Py_CLEAR(clear_module_state->__pyx_n_s_lanesection_s0);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_kp_s_no_default___reduce___due_to_non);
-  Py_CLEAR(clear_module_state->__pyx_n_s_pyOpenDRIVE_RoadMark);
+  Py_CLEAR(clear_module_state->__pyx_n_s_pyOpenDRIVE_XmlNode);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_state);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce_cython);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce_ex);
-  Py_CLEAR(clear_module_state->__pyx_n_s_road_id);
-  Py_CLEAR(clear_module_state->__pyx_n_s_s_end);
-  Py_CLEAR(clear_module_state->__pyx_n_s_s_start);
   Py_CLEAR(clear_module_state->__pyx_n_s_self);
   Py_CLEAR(clear_module_state->__pyx_n_s_setstate);
   Py_CLEAR(clear_module_state->__pyx_n_s_setstate_cython);
   Py_CLEAR(clear_module_state->__pyx_kp_s_stringsource);
-  Py_CLEAR(clear_module_state->__pyx_n_s_t_offset);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
-  Py_CLEAR(clear_module_state->__pyx_n_s_type);
-  Py_CLEAR(clear_module_state->__pyx_n_s_width);
   Py_CLEAR(clear_module_state->__pyx_tuple_);
   Py_CLEAR(clear_module_state->__pyx_tuple__3);
   Py_CLEAR(clear_module_state->__pyx_codeobj__2);
@@ -2422,11 +2393,11 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   #ifdef __Pyx_FusedFunction_USED
   Py_VISIT(traverse_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_VISIT(traverse_module_state->__pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark);
-  Py_VISIT(traverse_module_state->__pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark);
-  Py_VISIT(traverse_module_state->__pyx_n_s_PyRoadMark);
-  Py_VISIT(traverse_module_state->__pyx_n_s_PyRoadMark___reduce_cython);
-  Py_VISIT(traverse_module_state->__pyx_n_s_PyRoadMark___setstate_cython);
+  Py_VISIT(traverse_module_state->__pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode);
+  Py_VISIT(traverse_module_state->__pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode);
+  Py_VISIT(traverse_module_state->__pyx_n_s_PyXmlNode);
+  Py_VISIT(traverse_module_state->__pyx_n_s_PyXmlNode___reduce_cython);
+  Py_VISIT(traverse_module_state->__pyx_n_s_PyXmlNode___setstate_cython);
   Py_VISIT(traverse_module_state->__pyx_n_s_TypeError);
   Py_VISIT(traverse_module_state->__pyx_n_s__5);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
@@ -2435,30 +2406,21 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_enable);
   Py_VISIT(traverse_module_state->__pyx_kp_u_gc);
   Py_VISIT(traverse_module_state->__pyx_n_s_getstate);
-  Py_VISIT(traverse_module_state->__pyx_n_s_group_s0);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
   Py_VISIT(traverse_module_state->__pyx_kp_u_isenabled);
-  Py_VISIT(traverse_module_state->__pyx_n_s_lane_id);
-  Py_VISIT(traverse_module_state->__pyx_n_s_lanesection_s0);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_kp_s_no_default___reduce___due_to_non);
-  Py_VISIT(traverse_module_state->__pyx_n_s_pyOpenDRIVE_RoadMark);
+  Py_VISIT(traverse_module_state->__pyx_n_s_pyOpenDRIVE_XmlNode);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_state);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce_cython);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce_ex);
-  Py_VISIT(traverse_module_state->__pyx_n_s_road_id);
-  Py_VISIT(traverse_module_state->__pyx_n_s_s_end);
-  Py_VISIT(traverse_module_state->__pyx_n_s_s_start);
   Py_VISIT(traverse_module_state->__pyx_n_s_self);
   Py_VISIT(traverse_module_state->__pyx_n_s_setstate);
   Py_VISIT(traverse_module_state->__pyx_n_s_setstate_cython);
   Py_VISIT(traverse_module_state->__pyx_kp_s_stringsource);
-  Py_VISIT(traverse_module_state->__pyx_n_s_t_offset);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
-  Py_VISIT(traverse_module_state->__pyx_n_s_type);
-  Py_VISIT(traverse_module_state->__pyx_n_s_width);
   Py_VISIT(traverse_module_state->__pyx_tuple_);
   Py_VISIT(traverse_module_state->__pyx_tuple__3);
   Py_VISIT(traverse_module_state->__pyx_codeobj__2);
@@ -2510,12 +2472,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #if CYTHON_USE_MODULE_STATE
 #endif
 #if CYTHON_USE_MODULE_STATE
-#define __pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark __pyx_mstate_global->__pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark
+#define __pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode __pyx_mstate_global->__pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode
 #endif
-#define __pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark __pyx_mstate_global->__pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark
-#define __pyx_n_s_PyRoadMark __pyx_mstate_global->__pyx_n_s_PyRoadMark
-#define __pyx_n_s_PyRoadMark___reduce_cython __pyx_mstate_global->__pyx_n_s_PyRoadMark___reduce_cython
-#define __pyx_n_s_PyRoadMark___setstate_cython __pyx_mstate_global->__pyx_n_s_PyRoadMark___setstate_cython
+#define __pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode __pyx_mstate_global->__pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode
+#define __pyx_n_s_PyXmlNode __pyx_mstate_global->__pyx_n_s_PyXmlNode
+#define __pyx_n_s_PyXmlNode___reduce_cython __pyx_mstate_global->__pyx_n_s_PyXmlNode___reduce_cython
+#define __pyx_n_s_PyXmlNode___setstate_cython __pyx_mstate_global->__pyx_n_s_PyXmlNode___setstate_cython
 #define __pyx_n_s_TypeError __pyx_mstate_global->__pyx_n_s_TypeError
 #define __pyx_n_s__5 __pyx_mstate_global->__pyx_n_s__5
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
@@ -2524,130 +2486,39 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_enable __pyx_mstate_global->__pyx_kp_u_enable
 #define __pyx_kp_u_gc __pyx_mstate_global->__pyx_kp_u_gc
 #define __pyx_n_s_getstate __pyx_mstate_global->__pyx_n_s_getstate
-#define __pyx_n_s_group_s0 __pyx_mstate_global->__pyx_n_s_group_s0
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
 #define __pyx_kp_u_isenabled __pyx_mstate_global->__pyx_kp_u_isenabled
-#define __pyx_n_s_lane_id __pyx_mstate_global->__pyx_n_s_lane_id
-#define __pyx_n_s_lanesection_s0 __pyx_mstate_global->__pyx_n_s_lanesection_s0
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_kp_s_no_default___reduce___due_to_non __pyx_mstate_global->__pyx_kp_s_no_default___reduce___due_to_non
-#define __pyx_n_s_pyOpenDRIVE_RoadMark __pyx_mstate_global->__pyx_n_s_pyOpenDRIVE_RoadMark
+#define __pyx_n_s_pyOpenDRIVE_XmlNode __pyx_mstate_global->__pyx_n_s_pyOpenDRIVE_XmlNode
 #define __pyx_n_s_pyx_state __pyx_mstate_global->__pyx_n_s_pyx_state
 #define __pyx_n_s_reduce __pyx_mstate_global->__pyx_n_s_reduce
 #define __pyx_n_s_reduce_cython __pyx_mstate_global->__pyx_n_s_reduce_cython
 #define __pyx_n_s_reduce_ex __pyx_mstate_global->__pyx_n_s_reduce_ex
-#define __pyx_n_s_road_id __pyx_mstate_global->__pyx_n_s_road_id
-#define __pyx_n_s_s_end __pyx_mstate_global->__pyx_n_s_s_end
-#define __pyx_n_s_s_start __pyx_mstate_global->__pyx_n_s_s_start
 #define __pyx_n_s_self __pyx_mstate_global->__pyx_n_s_self
 #define __pyx_n_s_setstate __pyx_mstate_global->__pyx_n_s_setstate
 #define __pyx_n_s_setstate_cython __pyx_mstate_global->__pyx_n_s_setstate_cython
 #define __pyx_kp_s_stringsource __pyx_mstate_global->__pyx_kp_s_stringsource
-#define __pyx_n_s_t_offset __pyx_mstate_global->__pyx_n_s_t_offset
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
-#define __pyx_n_s_type __pyx_mstate_global->__pyx_n_s_type
-#define __pyx_n_s_width __pyx_mstate_global->__pyx_n_s_width
 #define __pyx_tuple_ __pyx_mstate_global->__pyx_tuple_
 #define __pyx_tuple__3 __pyx_mstate_global->__pyx_tuple__3
 #define __pyx_codeobj__2 __pyx_mstate_global->__pyx_codeobj__2
 #define __pyx_codeobj__4 __pyx_mstate_global->__pyx_codeobj__4
 /* #### Code section: module_code ### */
 
-/* "string.from_py":13
+/* "pyOpenDRIVE/XmlNode.pyx":6
  * 
- * @cname("__pyx_convert_string_from_py_std__in_string")
- * cdef string __pyx_convert_string_from_py_std__in_string(object o) except *:             # <<<<<<<<<<<<<<
- *     cdef Py_ssize_t length = 0
- *     cdef const char* data = __Pyx_PyObject_AsStringAndSize(o, &length)
- */
-
-static std::string __pyx_convert_string_from_py_std__in_string(PyObject *__pyx_v_o) {
-  Py_ssize_t __pyx_v_length;
-  char const *__pyx_v_data;
-  std::string __pyx_r;
-  char const *__pyx_t_1;
-  std::string __pyx_t_2;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-
-  /* "string.from_py":14
- * @cname("__pyx_convert_string_from_py_std__in_string")
- * cdef string __pyx_convert_string_from_py_std__in_string(object o) except *:
- *     cdef Py_ssize_t length = 0             # <<<<<<<<<<<<<<
- *     cdef const char* data = __Pyx_PyObject_AsStringAndSize(o, &length)
- *     return string(data, length)
- */
-  __pyx_v_length = 0;
-
-  /* "string.from_py":15
- * cdef string __pyx_convert_string_from_py_std__in_string(object o) except *:
- *     cdef Py_ssize_t length = 0
- *     cdef const char* data = __Pyx_PyObject_AsStringAndSize(o, &length)             # <<<<<<<<<<<<<<
- *     return string(data, length)
- * 
- */
-  __pyx_t_1 = __Pyx_PyObject_AsStringAndSize(__pyx_v_o, (&__pyx_v_length)); if (unlikely(__pyx_t_1 == ((char const *)NULL))) __PYX_ERR(0, 15, __pyx_L1_error)
-  __pyx_v_data = __pyx_t_1;
-
-  /* "string.from_py":16
- *     cdef Py_ssize_t length = 0
- *     cdef const char* data = __Pyx_PyObject_AsStringAndSize(o, &length)
- *     return string(data, length)             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  try {
-    __pyx_t_2 = std::string(__pyx_v_data, __pyx_v_length);
-  } catch(...) {
-    __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 16, __pyx_L1_error)
-  }
-  __pyx_r = __pyx_t_2;
-  goto __pyx_L0;
-
-  /* "string.from_py":13
- * 
- * @cname("__pyx_convert_string_from_py_std__in_string")
- * cdef string __pyx_convert_string_from_py_std__in_string(object o) except *:             # <<<<<<<<<<<<<<
- *     cdef Py_ssize_t length = 0
- *     cdef const char* data = __Pyx_PyObject_AsStringAndSize(o, &length)
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_AddTraceback("string.from_py.__pyx_convert_string_from_py_std__in_string", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_pretend_to_initialize(&__pyx_r);
-  __pyx_L0:;
-  return __pyx_r;
-}
-
-/* "pyOpenDRIVE/RoadMark.pyx":6
- * 
- * cdef class PyRoadMark:
- *     def __cinit__(self, string road_id, double lanesection_s0, int lane_id, double group_s0, double s_start, double s_end, double t_offset, double width, string type):             # <<<<<<<<<<<<<<
- *         self.c_self = make_shared[RoadMark](road_id, lanesection_s0, lane_id, group_s0, s_start, s_end, t_offset, width, type)
+ * cdef class PyXmlNode:
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
+ *         self.c_self = make_shared[XmlNode]()
  */
 
 /* Python wrapper */
-static int __pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  std::string __pyx_v_road_id;
-  double __pyx_v_lanesection_s0;
-  int __pyx_v_lane_id;
-  double __pyx_v_group_s0;
-  double __pyx_v_s_start;
-  double __pyx_v_s_end;
-  double __pyx_v_t_offset;
-  double __pyx_v_width;
-  std::string __pyx_v_type;
+static int __pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[9] = {0,0,0,0,0,0,0,0,0};
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
@@ -2657,210 +2528,48 @@ static int __pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_1__cinit__(PyObject *__
   __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return -1;
   #endif
   __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
-  {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_road_id,&__pyx_n_s_lanesection_s0,&__pyx_n_s_lane_id,&__pyx_n_s_group_s0,&__pyx_n_s_s_start,&__pyx_n_s_s_end,&__pyx_n_s_t_offset,&__pyx_n_s_width,&__pyx_n_s_type,0};
-    if (__pyx_kwds) {
-      Py_ssize_t kw_args;
-      switch (__pyx_nargs) {
-        case  9: values[8] = __Pyx_Arg_VARARGS(__pyx_args, 8);
-        CYTHON_FALLTHROUGH;
-        case  8: values[7] = __Pyx_Arg_VARARGS(__pyx_args, 7);
-        CYTHON_FALLTHROUGH;
-        case  7: values[6] = __Pyx_Arg_VARARGS(__pyx_args, 6);
-        CYTHON_FALLTHROUGH;
-        case  6: values[5] = __Pyx_Arg_VARARGS(__pyx_args, 5);
-        CYTHON_FALLTHROUGH;
-        case  5: values[4] = __Pyx_Arg_VARARGS(__pyx_args, 4);
-        CYTHON_FALLTHROUGH;
-        case  4: values[3] = __Pyx_Arg_VARARGS(__pyx_args, 3);
-        CYTHON_FALLTHROUGH;
-        case  3: values[2] = __Pyx_Arg_VARARGS(__pyx_args, 2);
-        CYTHON_FALLTHROUGH;
-        case  2: values[1] = __Pyx_Arg_VARARGS(__pyx_args, 1);
-        CYTHON_FALLTHROUGH;
-        case  1: values[0] = __Pyx_Arg_VARARGS(__pyx_args, 0);
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = __Pyx_NumKwargs_VARARGS(__pyx_kwds);
-      switch (__pyx_nargs) {
-        case  0:
-        if (likely((values[0] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_road_id)) != 0)) {
-          (void)__Pyx_Arg_NewRef_VARARGS(values[0]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-        else goto __pyx_L5_argtuple_error;
-        CYTHON_FALLTHROUGH;
-        case  1:
-        if (likely((values[1] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_lanesection_s0)) != 0)) {
-          (void)__Pyx_Arg_NewRef_VARARGS(values[1]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 9, 9, 1); __PYX_ERR(1, 6, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  2:
-        if (likely((values[2] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_lane_id)) != 0)) {
-          (void)__Pyx_Arg_NewRef_VARARGS(values[2]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 9, 9, 2); __PYX_ERR(1, 6, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  3:
-        if (likely((values[3] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_group_s0)) != 0)) {
-          (void)__Pyx_Arg_NewRef_VARARGS(values[3]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 9, 9, 3); __PYX_ERR(1, 6, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  4:
-        if (likely((values[4] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_s_start)) != 0)) {
-          (void)__Pyx_Arg_NewRef_VARARGS(values[4]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 9, 9, 4); __PYX_ERR(1, 6, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  5:
-        if (likely((values[5] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_s_end)) != 0)) {
-          (void)__Pyx_Arg_NewRef_VARARGS(values[5]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 9, 9, 5); __PYX_ERR(1, 6, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  6:
-        if (likely((values[6] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_t_offset)) != 0)) {
-          (void)__Pyx_Arg_NewRef_VARARGS(values[6]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 9, 9, 6); __PYX_ERR(1, 6, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  7:
-        if (likely((values[7] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_width)) != 0)) {
-          (void)__Pyx_Arg_NewRef_VARARGS(values[7]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 9, 9, 7); __PYX_ERR(1, 6, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  8:
-        if (likely((values[8] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_type)) != 0)) {
-          (void)__Pyx_Arg_NewRef_VARARGS(values[8]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-        else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 9, 9, 8); __PYX_ERR(1, 6, __pyx_L3_error)
-        }
-      }
-      if (unlikely(kw_args > 0)) {
-        const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__cinit__") < 0)) __PYX_ERR(1, 6, __pyx_L3_error)
-      }
-    } else if (unlikely(__pyx_nargs != 9)) {
-      goto __pyx_L5_argtuple_error;
-    } else {
-      values[0] = __Pyx_Arg_VARARGS(__pyx_args, 0);
-      values[1] = __Pyx_Arg_VARARGS(__pyx_args, 1);
-      values[2] = __Pyx_Arg_VARARGS(__pyx_args, 2);
-      values[3] = __Pyx_Arg_VARARGS(__pyx_args, 3);
-      values[4] = __Pyx_Arg_VARARGS(__pyx_args, 4);
-      values[5] = __Pyx_Arg_VARARGS(__pyx_args, 5);
-      values[6] = __Pyx_Arg_VARARGS(__pyx_args, 6);
-      values[7] = __Pyx_Arg_VARARGS(__pyx_args, 7);
-      values[8] = __Pyx_Arg_VARARGS(__pyx_args, 8);
-    }
-    __pyx_v_road_id = __pyx_convert_string_from_py_std__in_string(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_lanesection_s0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_lanesection_s0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_lane_id = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_lane_id == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_group_s0 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_group_s0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_s_start = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_s_start == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_s_end = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_s_end == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_t_offset = __pyx_PyFloat_AsDouble(values[6]); if (unlikely((__pyx_v_t_offset == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_width = __pyx_PyFloat_AsDouble(values[7]); if (unlikely((__pyx_v_width == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-    __pyx_v_type = __pyx_convert_string_from_py_std__in_string(values[8]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 6, __pyx_L3_error)
-  }
-  goto __pyx_L6_skip;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 9, 9, __pyx_nargs); __PYX_ERR(1, 6, __pyx_L3_error)
-  __pyx_L6_skip:;
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L3_error:;
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_VARARGS(values[__pyx_temp]);
-    }
-  }
-  __Pyx_AddTraceback("pyOpenDRIVE.RoadMark.PyRoadMark.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return -1;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark___cinit__(((struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *)__pyx_v_self), __PYX_STD_MOVE_IF_SUPPORTED(__pyx_v_road_id), __pyx_v_lanesection_s0, __pyx_v_lane_id, __pyx_v_group_s0, __pyx_v_s_start, __pyx_v_s_end, __pyx_v_t_offset, __pyx_v_width, __PYX_STD_MOVE_IF_SUPPORTED(__pyx_v_type));
+  if (unlikely(__pyx_nargs > 0)) {
+    __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 0, 0, __pyx_nargs); return -1;}
+  if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_VARARGS(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__cinit__", 0))) return -1;
+  __pyx_r = __pyx_pf_11pyOpenDRIVE_7XmlNode_9PyXmlNode___cinit__(((struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *)__pyx_v_self));
 
   /* function exit code */
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_VARARGS(values[__pyx_temp]);
-    }
-  }
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark___cinit__(struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *__pyx_v_self, std::string __pyx_v_road_id, double __pyx_v_lanesection_s0, int __pyx_v_lane_id, double __pyx_v_group_s0, double __pyx_v_s_start, double __pyx_v_s_end, double __pyx_v_t_offset, double __pyx_v_width, std::string __pyx_v_type) {
+static int __pyx_pf_11pyOpenDRIVE_7XmlNode_9PyXmlNode___cinit__(struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *__pyx_v_self) {
   int __pyx_r;
-  std::shared_ptr<odr::RoadMark>  __pyx_t_1;
+  std::shared_ptr<odr::XmlNode>  __pyx_t_1;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "pyOpenDRIVE/RoadMark.pyx":7
- * cdef class PyRoadMark:
- *     def __cinit__(self, string road_id, double lanesection_s0, int lane_id, double group_s0, double s_start, double s_end, double t_offset, double width, string type):
- *         self.c_self = make_shared[RoadMark](road_id, lanesection_s0, lane_id, group_s0, s_start, s_end, t_offset, width, type)             # <<<<<<<<<<<<<<
+  /* "pyOpenDRIVE/XmlNode.pyx":7
+ * cdef class PyXmlNode:
+ *     def __cinit__(self):
+ *         self.c_self = make_shared[XmlNode]()             # <<<<<<<<<<<<<<
  */
   try {
-    __pyx_t_1 = std::make_shared<odr::RoadMark>(__pyx_v_road_id, __pyx_v_lanesection_s0, __pyx_v_lane_id, __pyx_v_group_s0, __pyx_v_s_start, __pyx_v_s_end, __pyx_v_t_offset, __pyx_v_width, __pyx_v_type);
+    __pyx_t_1 = std::make_shared<odr::XmlNode>();
   } catch(...) {
     __Pyx_CppExn2PyErr();
     __PYX_ERR(1, 7, __pyx_L1_error)
   }
   __pyx_v_self->c_self = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_1);
 
-  /* "pyOpenDRIVE/RoadMark.pyx":6
+  /* "pyOpenDRIVE/XmlNode.pyx":6
  * 
- * cdef class PyRoadMark:
- *     def __cinit__(self, string road_id, double lanesection_s0, int lane_id, double group_s0, double s_start, double s_end, double t_offset, double width, string type):             # <<<<<<<<<<<<<<
- *         self.c_self = make_shared[RoadMark](road_id, lanesection_s0, lane_id, group_s0, s_start, s_end, t_offset, width, type)
+ * cdef class PyXmlNode:
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
+ *         self.c_self = make_shared[XmlNode]()
  */
 
   /* function exit code */
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("pyOpenDRIVE.RoadMark.PyRoadMark.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("pyOpenDRIVE.XmlNode.PyXmlNode.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   return __pyx_r;
@@ -2873,15 +2582,15 @@ static int __pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark___cinit__(struct __pyx_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_3__reduce_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_3__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11pyOpenDRIVE_8RoadMark_10PyRoadMark_3__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_3__reduce_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11pyOpenDRIVE_7XmlNode_9PyXmlNode_3__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_3__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -2906,14 +2615,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("__reduce_cython__", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__reduce_cython__", 0))) return NULL;
-  __pyx_r = __pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark_2__reduce_cython__(((struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *)__pyx_v_self));
+  __pyx_r = __pyx_pf_11pyOpenDRIVE_7XmlNode_9PyXmlNode_2__reduce_cython__(((struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *__pyx_v_self) {
+static PyObject *__pyx_pf_11pyOpenDRIVE_7XmlNode_9PyXmlNode_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_lineno = 0;
@@ -2938,7 +2647,7 @@ static PyObject *__pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark_2__reduce_cython_
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("pyOpenDRIVE.RoadMark.PyRoadMark.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("pyOpenDRIVE.XmlNode.PyXmlNode.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -2953,15 +2662,15 @@ static PyObject *__pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark_2__reduce_cython_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_5__setstate_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_5__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11pyOpenDRIVE_8RoadMark_10PyRoadMark_5__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_5__setstate_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11pyOpenDRIVE_7XmlNode_9PyXmlNode_5__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_5__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3031,11 +2740,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("pyOpenDRIVE.RoadMark.PyRoadMark.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("pyOpenDRIVE.XmlNode.PyXmlNode.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark_4__setstate_cython__(((struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *)__pyx_v_self), __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_11pyOpenDRIVE_7XmlNode_9PyXmlNode_4__setstate_cython__(((struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *)__pyx_v_self), __pyx_v___pyx_state);
 
   /* function exit code */
   {
@@ -3048,7 +2757,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_11pyOpenDRIVE_7XmlNode_9PyXmlNode_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_lineno = 0;
@@ -3073,15 +2782,15 @@ static PyObject *__pyx_pf_11pyOpenDRIVE_8RoadMark_10PyRoadMark_4__setstate_cytho
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("pyOpenDRIVE.RoadMark.PyRoadMark.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("pyOpenDRIVE.XmlNode.PyXmlNode.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_tp_new_11pyOpenDRIVE_8RoadMark_PyRoadMark(PyTypeObject *t, PyObject *a, PyObject *k) {
-  struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *p;
+static PyObject *__pyx_tp_new_11pyOpenDRIVE_7XmlNode_PyXmlNode(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *p;
   PyObject *o;
   #if CYTHON_COMPILING_IN_LIMITED_API
   allocfunc alloc_func = (allocfunc)PyType_GetSlot(t, Py_tp_alloc);
@@ -3094,20 +2803,20 @@ static PyObject *__pyx_tp_new_11pyOpenDRIVE_8RoadMark_PyRoadMark(PyTypeObject *t
   }
   if (unlikely(!o)) return 0;
   #endif
-  p = ((struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *)o);
-  new((void*)&(p->c_self)) std::shared_ptr<odr::RoadMark> ();
-  if (unlikely(__pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_1__cinit__(o, a, k) < 0)) goto bad;
+  p = ((struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *)o);
+  new((void*)&(p->c_self)) std::shared_ptr<odr::XmlNode> ();
+  if (unlikely(__pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_1__cinit__(o, __pyx_empty_tuple, NULL) < 0)) goto bad;
   return o;
   bad:
   Py_DECREF(o); o = 0;
   return NULL;
 }
 
-static void __pyx_tp_dealloc_11pyOpenDRIVE_8RoadMark_PyRoadMark(PyObject *o) {
-  struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *p = (struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark *)o;
+static void __pyx_tp_dealloc_11pyOpenDRIVE_7XmlNode_PyXmlNode(PyObject *o) {
+  struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *p = (struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode *)o;
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely((PY_VERSION_HEX >= 0x03080000 || __Pyx_PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE)) && __Pyx_PyObject_GetSlot(o, tp_finalize, destructor)) && (!PyType_IS_GC(Py_TYPE(o)) || !__Pyx_PyObject_GC_IsFinalized(o))) {
-    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_11pyOpenDRIVE_8RoadMark_PyRoadMark) {
+    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_11pyOpenDRIVE_7XmlNode_PyXmlNode) {
       if (PyObject_CallFinalizerFromDealloc(o)) return;
     }
   }
@@ -3123,33 +2832,33 @@ static void __pyx_tp_dealloc_11pyOpenDRIVE_8RoadMark_PyRoadMark(PyObject *o) {
   #endif
 }
 
-static PyMethodDef __pyx_methods_11pyOpenDRIVE_8RoadMark_PyRoadMark[] = {
-  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11pyOpenDRIVE_8RoadMark_10PyRoadMark_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+static PyMethodDef __pyx_methods_11pyOpenDRIVE_7XmlNode_PyXmlNode[] = {
+  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11pyOpenDRIVE_7XmlNode_9PyXmlNode_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 #if CYTHON_USE_TYPE_SPECS
-static PyType_Slot __pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark_slots[] = {
-  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_11pyOpenDRIVE_8RoadMark_PyRoadMark},
-  {Py_tp_methods, (void *)__pyx_methods_11pyOpenDRIVE_8RoadMark_PyRoadMark},
-  {Py_tp_new, (void *)__pyx_tp_new_11pyOpenDRIVE_8RoadMark_PyRoadMark},
+static PyType_Slot __pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode_slots[] = {
+  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_11pyOpenDRIVE_7XmlNode_PyXmlNode},
+  {Py_tp_methods, (void *)__pyx_methods_11pyOpenDRIVE_7XmlNode_PyXmlNode},
+  {Py_tp_new, (void *)__pyx_tp_new_11pyOpenDRIVE_7XmlNode_PyXmlNode},
   {0, 0},
 };
-static PyType_Spec __pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark_spec = {
-  "pyOpenDRIVE.RoadMark.PyRoadMark",
-  sizeof(struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark),
+static PyType_Spec __pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode_spec = {
+  "pyOpenDRIVE.XmlNode.PyXmlNode",
+  sizeof(struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE,
-  __pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark_slots,
+  __pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode_slots,
 };
 #else
 
-static PyTypeObject __pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark = {
+static PyTypeObject __pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode = {
   PyVarObject_HEAD_INIT(0, 0)
-  "pyOpenDRIVE.RoadMark.""PyRoadMark", /*tp_name*/
-  sizeof(struct __pyx_obj_11pyOpenDRIVE_8RoadMark_PyRoadMark), /*tp_basicsize*/
+  "pyOpenDRIVE.XmlNode.""PyXmlNode", /*tp_name*/
+  sizeof(struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_11pyOpenDRIVE_8RoadMark_PyRoadMark, /*tp_dealloc*/
+  __pyx_tp_dealloc_11pyOpenDRIVE_7XmlNode_PyXmlNode, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
   0, /*tp_print*/
   #endif
@@ -3182,7 +2891,7 @@ static PyTypeObject __pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_11pyOpenDRIVE_8RoadMark_PyRoadMark, /*tp_methods*/
+  __pyx_methods_11pyOpenDRIVE_7XmlNode_PyXmlNode, /*tp_methods*/
   0, /*tp_members*/
   0, /*tp_getset*/
   0, /*tp_base*/
@@ -3194,7 +2903,7 @@ static PyTypeObject __pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark = {
   #endif
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_11pyOpenDRIVE_8RoadMark_PyRoadMark, /*tp_new*/
+  __pyx_tp_new_11pyOpenDRIVE_7XmlNode_PyXmlNode, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -3242,9 +2951,9 @@ static PyMethodDef __pyx_methods[] = {
 
 static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
-    {&__pyx_n_s_PyRoadMark, __pyx_k_PyRoadMark, sizeof(__pyx_k_PyRoadMark), 0, 0, 1, 1},
-    {&__pyx_n_s_PyRoadMark___reduce_cython, __pyx_k_PyRoadMark___reduce_cython, sizeof(__pyx_k_PyRoadMark___reduce_cython), 0, 0, 1, 1},
-    {&__pyx_n_s_PyRoadMark___setstate_cython, __pyx_k_PyRoadMark___setstate_cython, sizeof(__pyx_k_PyRoadMark___setstate_cython), 0, 0, 1, 1},
+    {&__pyx_n_s_PyXmlNode, __pyx_k_PyXmlNode, sizeof(__pyx_k_PyXmlNode), 0, 0, 1, 1},
+    {&__pyx_n_s_PyXmlNode___reduce_cython, __pyx_k_PyXmlNode___reduce_cython, sizeof(__pyx_k_PyXmlNode___reduce_cython), 0, 0, 1, 1},
+    {&__pyx_n_s_PyXmlNode___setstate_cython, __pyx_k_PyXmlNode___setstate_cython, sizeof(__pyx_k_PyXmlNode___setstate_cython), 0, 0, 1, 1},
     {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
     {&__pyx_n_s__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
@@ -3253,30 +2962,21 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_enable, __pyx_k_enable, sizeof(__pyx_k_enable), 0, 1, 0, 0},
     {&__pyx_kp_u_gc, __pyx_k_gc, sizeof(__pyx_k_gc), 0, 1, 0, 0},
     {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
-    {&__pyx_n_s_group_s0, __pyx_k_group_s0, sizeof(__pyx_k_group_s0), 0, 0, 1, 1},
     {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
     {&__pyx_kp_u_isenabled, __pyx_k_isenabled, sizeof(__pyx_k_isenabled), 0, 1, 0, 0},
-    {&__pyx_n_s_lane_id, __pyx_k_lane_id, sizeof(__pyx_k_lane_id), 0, 0, 1, 1},
-    {&__pyx_n_s_lanesection_s0, __pyx_k_lanesection_s0, sizeof(__pyx_k_lanesection_s0), 0, 0, 1, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
     {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
-    {&__pyx_n_s_pyOpenDRIVE_RoadMark, __pyx_k_pyOpenDRIVE_RoadMark, sizeof(__pyx_k_pyOpenDRIVE_RoadMark), 0, 0, 1, 1},
+    {&__pyx_n_s_pyOpenDRIVE_XmlNode, __pyx_k_pyOpenDRIVE_XmlNode, sizeof(__pyx_k_pyOpenDRIVE_XmlNode), 0, 0, 1, 1},
     {&__pyx_n_s_pyx_state, __pyx_k_pyx_state, sizeof(__pyx_k_pyx_state), 0, 0, 1, 1},
     {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
     {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
     {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
-    {&__pyx_n_s_road_id, __pyx_k_road_id, sizeof(__pyx_k_road_id), 0, 0, 1, 1},
-    {&__pyx_n_s_s_end, __pyx_k_s_end, sizeof(__pyx_k_s_end), 0, 0, 1, 1},
-    {&__pyx_n_s_s_start, __pyx_k_s_start, sizeof(__pyx_k_s_start), 0, 0, 1, 1},
     {&__pyx_n_s_self, __pyx_k_self, sizeof(__pyx_k_self), 0, 0, 1, 1},
     {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
     {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
     {&__pyx_kp_s_stringsource, __pyx_k_stringsource, sizeof(__pyx_k_stringsource), 0, 0, 1, 0},
-    {&__pyx_n_s_t_offset, __pyx_k_t_offset, sizeof(__pyx_k_t_offset), 0, 0, 1, 1},
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
-    {&__pyx_n_s_type, __pyx_k_type, sizeof(__pyx_k_type), 0, 0, 1, 1},
-    {&__pyx_n_s_width, __pyx_k_width, sizeof(__pyx_k_width), 0, 0, 1, 1},
     {0, 0, 0, 0, 0, 0, 0}
   };
   return __Pyx_InitStrings(__pyx_string_tab);
@@ -3375,27 +3075,27 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark_spec, NULL); if (unlikely(!__pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark)) __PYX_ERR(1, 5, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark_spec, __pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
+  __pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode_spec, NULL); if (unlikely(!__pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode)) __PYX_ERR(1, 5, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode_spec, __pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
   #else
-  __pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark = &__pyx_type_11pyOpenDRIVE_8RoadMark_PyRoadMark;
+  __pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode = &__pyx_type_11pyOpenDRIVE_7XmlNode_PyXmlNode;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
-  __pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark->tp_print = 0;
+  __pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode->tp_print = 0;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark->tp_dictoffset && __pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark->tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark->tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode->tp_dictoffset && __pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode->tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode->tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PyRoadMark, (PyObject *) __pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_PyXmlNode, (PyObject *) __pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_11pyOpenDRIVE_8RoadMark_PyRoadMark) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_11pyOpenDRIVE_7XmlNode_PyXmlNode) < 0) __PYX_ERR(1, 5, __pyx_L1_error)
   #endif
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -3432,10 +3132,10 @@ static int __Pyx_modinit_function_import_code(void) {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_RoadMark(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_XmlNode(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_RoadMark},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_XmlNode},
   {0, NULL}
 };
 #endif
@@ -3448,7 +3148,7 @@ namespace {
   #endif
   {
       PyModuleDef_HEAD_INIT,
-      "RoadMark",
+      "XmlNode",
       0, /* m_doc */
     #if CYTHON_PEP489_MULTI_PHASE_INIT
       0, /* m_size */
@@ -3496,11 +3196,11 @@ namespace {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC initRoadMark(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC initRoadMark(void)
+__Pyx_PyMODINIT_FUNC initXmlNode(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC initXmlNode(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_RoadMark(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_RoadMark(void)
+__Pyx_PyMODINIT_FUNC PyInit_XmlNode(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_XmlNode(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -3581,7 +3281,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_RoadMark(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_XmlNode(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -3598,7 +3298,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_RoadMark(PyObject *__pyx_pyinit_mo
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'RoadMark' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'XmlNode' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -3610,13 +3310,13 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_RoadMark(PyObject *__pyx_pyinit_mo
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("RoadMark", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("XmlNode", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   if (unlikely(!__pyx_m)) __PYX_ERR(1, 1, __pyx_L1_error)
   #elif CYTHON_USE_MODULE_STATE
   __pyx_t_1 = PyModule_Create(&__pyx_moduledef); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   {
     int add_module_result = PyState_AddModule(__pyx_t_1, &__pyx_moduledef);
-    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to "RoadMark" pseudovariable */
+    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to "XmlNode" pseudovariable */
     if (unlikely((add_module_result < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
     pystate_addmodule_run = 1;
   }
@@ -3640,7 +3340,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_RoadMark(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_XmlNode(void)", 0);
   if (__Pyx_check_binary_version(__PYX_LIMITED_VERSION_HEX, __Pyx_get_runtime_version(), CYTHON_COMPILING_IN_LIMITED_API) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -3678,14 +3378,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_pyOpenDRIVE__RoadMark) {
+  if (__pyx_module_is_main_pyOpenDRIVE__XmlNode) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(1, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "pyOpenDRIVE.RoadMark")) {
-      if (unlikely((PyDict_SetItemString(modules, "pyOpenDRIVE.RoadMark", __pyx_m) < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "pyOpenDRIVE.XmlNode")) {
+      if (unlikely((PyDict_SetItemString(modules, "pyOpenDRIVE.XmlNode", __pyx_m) < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -3711,7 +3411,7 @@ if (!__Pyx_RefNanny) {
  *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
  * def __setstate_cython__(self, __pyx_state):
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11pyOpenDRIVE_8RoadMark_10PyRoadMark_3__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyRoadMark___reduce_cython, NULL, __pyx_n_s_pyOpenDRIVE_RoadMark, __pyx_d, ((PyObject *)__pyx_codeobj__2)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11pyOpenDRIVE_7XmlNode_9PyXmlNode_3__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyXmlNode___reduce_cython, NULL, __pyx_n_s_pyOpenDRIVE_XmlNode, __pyx_d, ((PyObject *)__pyx_codeobj__2)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_reduce_cython, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -3722,15 +3422,15 @@ if (!__Pyx_RefNanny) {
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11pyOpenDRIVE_8RoadMark_10PyRoadMark_5__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyRoadMark___setstate_cython, NULL, __pyx_n_s_pyOpenDRIVE_RoadMark, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11pyOpenDRIVE_7XmlNode_9PyXmlNode_5__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_PyXmlNode___setstate_cython, NULL, __pyx_n_s_pyOpenDRIVE_XmlNode, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_setstate_cython, __pyx_t_2) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "pyOpenDRIVE/RoadMark.pyx":1
+  /* "pyOpenDRIVE/XmlNode.pyx":1
  * # distutils: language=c++             # <<<<<<<<<<<<<<
  * 
- * from pyOpenDrive cimport RoadMark
+ * from pyOpenDrive cimport XmlNode
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -3744,7 +3444,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init pyOpenDRIVE.RoadMark", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init pyOpenDRIVE.XmlNode", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
@@ -3758,7 +3458,7 @@ if (!__Pyx_RefNanny) {
     }
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init pyOpenDRIVE.RoadMark");
+    PyErr_SetString(PyExc_ImportError, "init pyOpenDRIVE.XmlNode");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -4215,176 +3915,6 @@ static void __Pyx_RaiseArgtupleInvalid(
                  (num_expected == 1) ? "" : "s", num_found);
 }
 
-/* RaiseDoubleKeywords */
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-/* ParseKeywords */
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject *const *kwvalues,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
-    Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    int kwds_is_tuple = CYTHON_METH_FASTCALL && likely(PyTuple_Check(kwds));
-    while (1) {
-        Py_XDECREF(key); key = NULL;
-        Py_XDECREF(value); value = NULL;
-        if (kwds_is_tuple) {
-            Py_ssize_t size;
-#if CYTHON_ASSUME_SAFE_MACROS
-            size = PyTuple_GET_SIZE(kwds);
-#else
-            size = PyTuple_Size(kwds);
-            if (size < 0) goto bad;
-#endif
-            if (pos >= size) break;
-#if CYTHON_AVOID_BORROWED_REFS
-            key = __Pyx_PySequence_ITEM(kwds, pos);
-            if (!key) goto bad;
-#elif CYTHON_ASSUME_SAFE_MACROS
-            key = PyTuple_GET_ITEM(kwds, pos);
-#else
-            key = PyTuple_GetItem(kwds, pos);
-            if (!key) goto bad;
-#endif
-            value = kwvalues[pos];
-            pos++;
-        }
-        else
-        {
-            if (!PyDict_Next(kwds, &pos, &key, &value)) break;
-#if CYTHON_AVOID_BORROWED_REFS
-            Py_INCREF(key);
-#endif
-        }
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-#if CYTHON_AVOID_BORROWED_REFS
-            Py_INCREF(value);
-            Py_DECREF(key);
-#endif
-            key = NULL;
-            value = NULL;
-            continue;
-        }
-#if !CYTHON_AVOID_BORROWED_REFS
-        Py_INCREF(key);
-#endif
-        Py_INCREF(value);
-        name = first_kw_arg;
-        #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-#if CYTHON_AVOID_BORROWED_REFS
-                    value = NULL;
-#endif
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
-        #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (__Pyx_PyUnicode_GET_LENGTH(**name) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key)
-                );
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-#if CYTHON_AVOID_BORROWED_REFS
-                    value = NULL;
-#endif
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (__Pyx_PyUnicode_GET_LENGTH(**argname) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
-    }
-    Py_XDECREF(key);
-    Py_XDECREF(value);
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
-invalid_keyword_type:
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() keywords must be strings", function_name);
-    goto bad;
-invalid_keyword:
-    #if PY_MAJOR_VERSION < 3
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() got an unexpected keyword argument '%.200s'",
-        function_name, PyString_AsString(key));
-    #else
-    PyErr_Format(PyExc_TypeError,
-        "%s() got an unexpected keyword argument '%U'",
-        function_name, key);
-    #endif
-bad:
-    Py_XDECREF(key);
-    Py_XDECREF(value);
-    return -1;
-}
-
 /* KeywordStringCheck */
 static int __Pyx_CheckKeywordStrings(
     PyObject *kw,
@@ -4619,6 +4149,176 @@ bad:
     return;
 }
 #endif
+
+/* RaiseDoubleKeywords */
+static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+/* ParseKeywords */
+static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject *const *kwvalues,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    int kwds_is_tuple = CYTHON_METH_FASTCALL && likely(PyTuple_Check(kwds));
+    while (1) {
+        Py_XDECREF(key); key = NULL;
+        Py_XDECREF(value); value = NULL;
+        if (kwds_is_tuple) {
+            Py_ssize_t size;
+#if CYTHON_ASSUME_SAFE_MACROS
+            size = PyTuple_GET_SIZE(kwds);
+#else
+            size = PyTuple_Size(kwds);
+            if (size < 0) goto bad;
+#endif
+            if (pos >= size) break;
+#if CYTHON_AVOID_BORROWED_REFS
+            key = __Pyx_PySequence_ITEM(kwds, pos);
+            if (!key) goto bad;
+#elif CYTHON_ASSUME_SAFE_MACROS
+            key = PyTuple_GET_ITEM(kwds, pos);
+#else
+            key = PyTuple_GetItem(kwds, pos);
+            if (!key) goto bad;
+#endif
+            value = kwvalues[pos];
+            pos++;
+        }
+        else
+        {
+            if (!PyDict_Next(kwds, &pos, &key, &value)) break;
+#if CYTHON_AVOID_BORROWED_REFS
+            Py_INCREF(key);
+#endif
+        }
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+#if CYTHON_AVOID_BORROWED_REFS
+            Py_INCREF(value);
+            Py_DECREF(key);
+#endif
+            key = NULL;
+            value = NULL;
+            continue;
+        }
+#if !CYTHON_AVOID_BORROWED_REFS
+        Py_INCREF(key);
+#endif
+        Py_INCREF(value);
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+#if CYTHON_AVOID_BORROWED_REFS
+                    value = NULL;
+#endif
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (__Pyx_PyUnicode_GET_LENGTH(**name) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key)
+                );
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+#if CYTHON_AVOID_BORROWED_REFS
+                    value = NULL;
+#endif
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (__Pyx_PyUnicode_GET_LENGTH(**argname) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    Py_XDECREF(key);
+    Py_XDECREF(value);
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    #if PY_MAJOR_VERSION < 3
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+    PyErr_Format(PyExc_TypeError,
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    Py_XDECREF(key);
+    Py_XDECREF(value);
+    return -1;
+}
 
 /* FixUpExtensionType */
 #if CYTHON_USE_TYPE_SPECS
@@ -6923,301 +6623,6 @@ bad:
 }
 #endif
 
-/* CIntFromPyVerify */
-#define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
-#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
-#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
-    {\
-        func_type value = func_value;\
-        if (sizeof(target_type) < sizeof(func_type)) {\
-            if (unlikely(value != (func_type) (target_type) value)) {\
-                func_type zero = 0;\
-                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
-                    return (target_type) -1;\
-                if (is_unsigned && unlikely(value < zero))\
-                    goto raise_neg_overflow;\
-                else\
-                    goto raise_overflow;\
-            }\
-        }\
-        return (target_type) value;\
-    }
-
-/* CIntFromPy */
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const int neg_one = (int) -1, const_zero = (int) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-#if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_Check(x))) {
-        if ((sizeof(int) < sizeof(long))) {
-            __PYX_VERIFY_RETURN_INT(int, long, PyInt_AS_LONG(x))
-        } else {
-            long val = PyInt_AS_LONG(x);
-            if (is_unsigned && unlikely(val < 0)) {
-                goto raise_neg_overflow;
-            }
-            return (int) val;
-        }
-    } else
-#endif
-    if (likely(PyLong_Check(x))) {
-        if (is_unsigned) {
-#if CYTHON_USE_PYLONG_INTERNALS
-            if (unlikely(__Pyx_PyLong_IsNeg(x))) {
-                goto raise_neg_overflow;
-            } else if (__Pyx_PyLong_IsCompact(x)) {
-                __PYX_VERIFY_RETURN_INT(int, __Pyx_compact_upylong, __Pyx_PyLong_CompactValueUnsigned(x))
-            } else {
-                const digit* digits = __Pyx_PyLong_Digits(x);
-                assert(__Pyx_PyLong_DigitCount(x) > 1);
-                switch (__Pyx_PyLong_DigitCount(x)) {
-                    case 2:
-                        if ((8 * sizeof(int) > 1 * PyLong_SHIFT)) {
-                            if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
-                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                            } else if ((8 * sizeof(int) >= 2 * PyLong_SHIFT)) {
-                                return (int) (((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
-                            }
-                        }
-                        break;
-                    case 3:
-                        if ((8 * sizeof(int) > 2 * PyLong_SHIFT)) {
-                            if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
-                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                            } else if ((8 * sizeof(int) >= 3 * PyLong_SHIFT)) {
-                                return (int) (((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
-                            }
-                        }
-                        break;
-                    case 4:
-                        if ((8 * sizeof(int) > 3 * PyLong_SHIFT)) {
-                            if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
-                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                            } else if ((8 * sizeof(int) >= 4 * PyLong_SHIFT)) {
-                                return (int) (((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
-                            }
-                        }
-                        break;
-                }
-            }
-#endif
-#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x030C00A7
-            if (unlikely(Py_SIZE(x) < 0)) {
-                goto raise_neg_overflow;
-            }
-#else
-            {
-                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
-                if (unlikely(result < 0))
-                    return (int) -1;
-                if (unlikely(result == 1))
-                    goto raise_neg_overflow;
-            }
-#endif
-            if ((sizeof(int) <= sizeof(unsigned long))) {
-                __PYX_VERIFY_RETURN_INT_EXC(int, unsigned long, PyLong_AsUnsignedLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if ((sizeof(int) <= sizeof(unsigned PY_LONG_LONG))) {
-                __PYX_VERIFY_RETURN_INT_EXC(int, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
-#endif
-            }
-        } else {
-#if CYTHON_USE_PYLONG_INTERNALS
-            if (__Pyx_PyLong_IsCompact(x)) {
-                __PYX_VERIFY_RETURN_INT(int, __Pyx_compact_pylong, __Pyx_PyLong_CompactValue(x))
-            } else {
-                const digit* digits = __Pyx_PyLong_Digits(x);
-                assert(__Pyx_PyLong_DigitCount(x) > 1);
-                switch (__Pyx_PyLong_SignedDigitCount(x)) {
-                    case -2:
-                        if ((8 * sizeof(int) - 1 > 1 * PyLong_SHIFT)) {
-                            if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
-                                __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                            } else if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
-                                return (int) (((int)-1)*(((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                            }
-                        }
-                        break;
-                    case 2:
-                        if ((8 * sizeof(int) > 1 * PyLong_SHIFT)) {
-                            if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
-                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                            } else if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
-                                return (int) ((((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                            }
-                        }
-                        break;
-                    case -3:
-                        if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
-                            if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
-                                __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                            } else if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
-                                return (int) (((int)-1)*(((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                            }
-                        }
-                        break;
-                    case 3:
-                        if ((8 * sizeof(int) > 2 * PyLong_SHIFT)) {
-                            if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
-                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                            } else if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
-                                return (int) ((((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                            }
-                        }
-                        break;
-                    case -4:
-                        if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
-                            if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
-                                __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                            } else if ((8 * sizeof(int) - 1 > 4 * PyLong_SHIFT)) {
-                                return (int) (((int)-1)*(((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                            }
-                        }
-                        break;
-                    case 4:
-                        if ((8 * sizeof(int) > 3 * PyLong_SHIFT)) {
-                            if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
-                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                            } else if ((8 * sizeof(int) - 1 > 4 * PyLong_SHIFT)) {
-                                return (int) ((((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
-                            }
-                        }
-                        break;
-                }
-            }
-#endif
-            if ((sizeof(int) <= sizeof(long))) {
-                __PYX_VERIFY_RETURN_INT_EXC(int, long, PyLong_AsLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if ((sizeof(int) <= sizeof(PY_LONG_LONG))) {
-                __PYX_VERIFY_RETURN_INT_EXC(int, PY_LONG_LONG, PyLong_AsLongLong(x))
-#endif
-            }
-        }
-        {
-            int val;
-            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
-#if PY_MAJOR_VERSION < 3
-            if (likely(v) && !PyLong_Check(v)) {
-                PyObject *tmp = v;
-                v = PyNumber_Long(tmp);
-                Py_DECREF(tmp);
-            }
-#endif
-            if (likely(v)) {
-                int ret = -1;
-#if PY_VERSION_HEX < 0x030d0000 && !(CYTHON_COMPILING_IN_PYPY || CYTHON_COMPILING_IN_LIMITED_API) || defined(_PyLong_AsByteArray)
-                int one = 1; int is_little = (int)*(unsigned char *)&one;
-                unsigned char *bytes = (unsigned char *)&val;
-                ret = _PyLong_AsByteArray((PyLongObject *)v,
-                                           bytes, sizeof(val),
-                                           is_little, !is_unsigned);
-#else
-                PyObject *stepval = NULL, *mask = NULL, *shift = NULL;
-                int bits, remaining_bits, is_negative = 0;
-                long idigit;
-                int chunk_size = (sizeof(long) < 8) ? 30 : 62;
-                if (unlikely(!PyLong_CheckExact(v))) {
-                    PyObject *tmp = v;
-                    v = PyNumber_Long(v);
-                    assert(PyLong_CheckExact(v));
-                    Py_DECREF(tmp);
-                    if (unlikely(!v)) return (int) -1;
-                }
-#if CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x030B0000
-                if (Py_SIZE(x) == 0)
-                    return (int) 0;
-                is_negative = Py_SIZE(x) < 0;
-#else
-                {
-                    int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
-                    if (unlikely(result < 0))
-                        return (int) -1;
-                    is_negative = result == 1;
-                }
-#endif
-                if (is_unsigned && unlikely(is_negative)) {
-                    goto raise_neg_overflow;
-                } else if (is_negative) {
-                    stepval = PyNumber_Invert(v);
-                    if (unlikely(!stepval))
-                        return (int) -1;
-                } else {
-                    stepval = __Pyx_NewRef(v);
-                }
-                val = (int) 0;
-                mask = PyLong_FromLong((1L << chunk_size) - 1); if (unlikely(!mask)) goto done;
-                shift = PyLong_FromLong(chunk_size); if (unlikely(!shift)) goto done;
-                for (bits = 0; bits < (int) sizeof(int) * 8 - chunk_size; bits += chunk_size) {
-                    PyObject *tmp, *digit;
-                    digit = PyNumber_And(stepval, mask);
-                    if (unlikely(!digit)) goto done;
-                    idigit = PyLong_AsLong(digit);
-                    Py_DECREF(digit);
-                    if (unlikely(idigit < 0)) goto done;
-                    tmp = PyNumber_Rshift(stepval, shift);
-                    if (unlikely(!tmp)) goto done;
-                    Py_DECREF(stepval); stepval = tmp;
-                    val |= ((int) idigit) << bits;
-                    #if CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x030B0000
-                    if (Py_SIZE(stepval) == 0)
-                        goto unpacking_done;
-                    #endif
-                }
-                idigit = PyLong_AsLong(stepval);
-                if (unlikely(idigit < 0)) goto done;
-                remaining_bits = ((int) sizeof(int) * 8) - bits - (is_unsigned ? 0 : 1);
-                if (unlikely(idigit >= (1L << remaining_bits)))
-                    goto raise_overflow;
-                val |= ((int) idigit) << bits;
-            #if CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x030B0000
-            unpacking_done:
-            #endif
-                if (!is_unsigned) {
-                    if (unlikely(val & (((int) 1) << (sizeof(int) * 8 - 1))))
-                        goto raise_overflow;
-                    if (is_negative)
-                        val = ~val;
-                }
-                ret = 0;
-            done:
-                Py_XDECREF(shift);
-                Py_XDECREF(mask);
-                Py_XDECREF(stepval);
-#endif
-                Py_DECREF(v);
-                if (likely(!ret))
-                    return val;
-            }
-            return (int) -1;
-        }
-    } else {
-        int val;
-        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
-        if (!tmp) return (int) -1;
-        val = __Pyx_PyInt_As_int(tmp);
-        Py_DECREF(tmp);
-        return val;
-    }
-raise_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to int");
-    return (int) -1;
-raise_neg_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to int");
-    return (int) -1;
-}
-
 /* FormatTypeName */
 #if CYTHON_COMPILING_IN_LIMITED_API
 static __Pyx_TypeName
@@ -7297,6 +6702,28 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
 #endif
     }
 }
+
+/* CIntFromPyVerify */
+#define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
+#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
+#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
+    {\
+        func_type value = func_value;\
+        if (sizeof(target_type) < sizeof(func_type)) {\
+            if (unlikely(value != (func_type) (target_type) value)) {\
+                func_type zero = 0;\
+                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
+                    return (target_type) -1;\
+                if (is_unsigned && unlikely(value < zero))\
+                    goto raise_neg_overflow;\
+                else\
+                    goto raise_overflow;\
+            }\
+        }\
+        return (target_type) value;\
+    }
 
 /* CIntFromPy */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
@@ -7569,6 +6996,279 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to long");
     return (long) -1;
+}
+
+/* CIntFromPy */
+static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const int neg_one = (int) -1, const_zero = (int) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if ((sizeof(int) < sizeof(long))) {
+            __PYX_VERIFY_RETURN_INT(int, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (int) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            if (unlikely(__Pyx_PyLong_IsNeg(x))) {
+                goto raise_neg_overflow;
+            } else if (__Pyx_PyLong_IsCompact(x)) {
+                __PYX_VERIFY_RETURN_INT(int, __Pyx_compact_upylong, __Pyx_PyLong_CompactValueUnsigned(x))
+            } else {
+                const digit* digits = __Pyx_PyLong_Digits(x);
+                assert(__Pyx_PyLong_DigitCount(x) > 1);
+                switch (__Pyx_PyLong_DigitCount(x)) {
+                    case 2:
+                        if ((8 * sizeof(int) > 1 * PyLong_SHIFT)) {
+                            if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
+                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                            } else if ((8 * sizeof(int) >= 2 * PyLong_SHIFT)) {
+                                return (int) (((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
+                            }
+                        }
+                        break;
+                    case 3:
+                        if ((8 * sizeof(int) > 2 * PyLong_SHIFT)) {
+                            if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
+                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                            } else if ((8 * sizeof(int) >= 3 * PyLong_SHIFT)) {
+                                return (int) (((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
+                            }
+                        }
+                        break;
+                    case 4:
+                        if ((8 * sizeof(int) > 3 * PyLong_SHIFT)) {
+                            if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
+                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                            } else if ((8 * sizeof(int) >= 4 * PyLong_SHIFT)) {
+                                return (int) (((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0]));
+                            }
+                        }
+                        break;
+                }
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x030C00A7
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (int) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if ((sizeof(int) <= sizeof(unsigned long))) {
+                __PYX_VERIFY_RETURN_INT_EXC(int, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if ((sizeof(int) <= sizeof(unsigned PY_LONG_LONG))) {
+                __PYX_VERIFY_RETURN_INT_EXC(int, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            if (__Pyx_PyLong_IsCompact(x)) {
+                __PYX_VERIFY_RETURN_INT(int, __Pyx_compact_pylong, __Pyx_PyLong_CompactValue(x))
+            } else {
+                const digit* digits = __Pyx_PyLong_Digits(x);
+                assert(__Pyx_PyLong_DigitCount(x) > 1);
+                switch (__Pyx_PyLong_SignedDigitCount(x)) {
+                    case -2:
+                        if ((8 * sizeof(int) - 1 > 1 * PyLong_SHIFT)) {
+                            if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
+                                __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                            } else if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
+                                return (int) (((int)-1)*(((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                            }
+                        }
+                        break;
+                    case 2:
+                        if ((8 * sizeof(int) > 1 * PyLong_SHIFT)) {
+                            if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
+                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                            } else if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
+                                return (int) ((((((int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                            }
+                        }
+                        break;
+                    case -3:
+                        if ((8 * sizeof(int) - 1 > 2 * PyLong_SHIFT)) {
+                            if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
+                                __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                            } else if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
+                                return (int) (((int)-1)*(((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                            }
+                        }
+                        break;
+                    case 3:
+                        if ((8 * sizeof(int) > 2 * PyLong_SHIFT)) {
+                            if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
+                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                            } else if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
+                                return (int) ((((((((int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                            }
+                        }
+                        break;
+                    case -4:
+                        if ((8 * sizeof(int) - 1 > 3 * PyLong_SHIFT)) {
+                            if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
+                                __PYX_VERIFY_RETURN_INT(int, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                            } else if ((8 * sizeof(int) - 1 > 4 * PyLong_SHIFT)) {
+                                return (int) (((int)-1)*(((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                            }
+                        }
+                        break;
+                    case 4:
+                        if ((8 * sizeof(int) > 3 * PyLong_SHIFT)) {
+                            if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
+                                __PYX_VERIFY_RETURN_INT(int, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                            } else if ((8 * sizeof(int) - 1 > 4 * PyLong_SHIFT)) {
+                                return (int) ((((((((((int)digits[3]) << PyLong_SHIFT) | (int)digits[2]) << PyLong_SHIFT) | (int)digits[1]) << PyLong_SHIFT) | (int)digits[0])));
+                            }
+                        }
+                        break;
+                }
+            }
+#endif
+            if ((sizeof(int) <= sizeof(long))) {
+                __PYX_VERIFY_RETURN_INT_EXC(int, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if ((sizeof(int) <= sizeof(PY_LONG_LONG))) {
+                __PYX_VERIFY_RETURN_INT_EXC(int, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+            int val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+#if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+#endif
+            if (likely(v)) {
+                int ret = -1;
+#if PY_VERSION_HEX < 0x030d0000 && !(CYTHON_COMPILING_IN_PYPY || CYTHON_COMPILING_IN_LIMITED_API) || defined(_PyLong_AsByteArray)
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                           bytes, sizeof(val),
+                                           is_little, !is_unsigned);
+#else
+                PyObject *stepval = NULL, *mask = NULL, *shift = NULL;
+                int bits, remaining_bits, is_negative = 0;
+                long idigit;
+                int chunk_size = (sizeof(long) < 8) ? 30 : 62;
+                if (unlikely(!PyLong_CheckExact(v))) {
+                    PyObject *tmp = v;
+                    v = PyNumber_Long(v);
+                    assert(PyLong_CheckExact(v));
+                    Py_DECREF(tmp);
+                    if (unlikely(!v)) return (int) -1;
+                }
+#if CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x030B0000
+                if (Py_SIZE(x) == 0)
+                    return (int) 0;
+                is_negative = Py_SIZE(x) < 0;
+#else
+                {
+                    int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                    if (unlikely(result < 0))
+                        return (int) -1;
+                    is_negative = result == 1;
+                }
+#endif
+                if (is_unsigned && unlikely(is_negative)) {
+                    goto raise_neg_overflow;
+                } else if (is_negative) {
+                    stepval = PyNumber_Invert(v);
+                    if (unlikely(!stepval))
+                        return (int) -1;
+                } else {
+                    stepval = __Pyx_NewRef(v);
+                }
+                val = (int) 0;
+                mask = PyLong_FromLong((1L << chunk_size) - 1); if (unlikely(!mask)) goto done;
+                shift = PyLong_FromLong(chunk_size); if (unlikely(!shift)) goto done;
+                for (bits = 0; bits < (int) sizeof(int) * 8 - chunk_size; bits += chunk_size) {
+                    PyObject *tmp, *digit;
+                    digit = PyNumber_And(stepval, mask);
+                    if (unlikely(!digit)) goto done;
+                    idigit = PyLong_AsLong(digit);
+                    Py_DECREF(digit);
+                    if (unlikely(idigit < 0)) goto done;
+                    tmp = PyNumber_Rshift(stepval, shift);
+                    if (unlikely(!tmp)) goto done;
+                    Py_DECREF(stepval); stepval = tmp;
+                    val |= ((int) idigit) << bits;
+                    #if CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x030B0000
+                    if (Py_SIZE(stepval) == 0)
+                        goto unpacking_done;
+                    #endif
+                }
+                idigit = PyLong_AsLong(stepval);
+                if (unlikely(idigit < 0)) goto done;
+                remaining_bits = ((int) sizeof(int) * 8) - bits - (is_unsigned ? 0 : 1);
+                if (unlikely(idigit >= (1L << remaining_bits)))
+                    goto raise_overflow;
+                val |= ((int) idigit) << bits;
+            #if CYTHON_COMPILING_IN_LIMITED_API && PY_VERSION_HEX < 0x030B0000
+            unpacking_done:
+            #endif
+                if (!is_unsigned) {
+                    if (unlikely(val & (((int) 1) << (sizeof(int) * 8 - 1))))
+                        goto raise_overflow;
+                    if (is_negative)
+                        val = ~val;
+                }
+                ret = 0;
+            done:
+                Py_XDECREF(shift);
+                Py_XDECREF(mask);
+                Py_XDECREF(stepval);
+#endif
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+            return (int) -1;
+        }
+    } else {
+        int val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (int) -1;
+        val = __Pyx_PyInt_As_int(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to int");
+    return (int) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to int");
+    return (int) -1;
 }
 
 /* FastTypeChecks */

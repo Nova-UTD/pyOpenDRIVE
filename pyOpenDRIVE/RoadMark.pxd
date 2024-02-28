@@ -2,6 +2,8 @@
 
 cdef extern from "../src/RoadMark.cpp":
     pass
+cdef extern from "pugixml/pugixml.cpp" namespace "pugi":
+    pass
 
 from libcpp.vector cimport vector
 from libcpp.map cimport map

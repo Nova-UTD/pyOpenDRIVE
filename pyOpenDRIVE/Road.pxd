@@ -21,6 +21,7 @@ from pyOpenDrive.Mesh cimport Mesh3D
 from pyOpenDrive.RoadMark cimport RoadMark
 from pyOpenDrive.Math cimport Vec3D, Line3D
 from pyOpenDrive.RoadObject cimport RoadObject
+from pyOpenDrive.RoadSignal cimport RoadSignal
 
 cdef extern from "Road.h" namespace "odr":
     cdef cppclass Crossfall:

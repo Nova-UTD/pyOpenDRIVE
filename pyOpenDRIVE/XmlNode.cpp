@@ -1522,8 +1522,8 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_11pyOpenDRIVE_7XmlNode_PyXmlNode;
 
-/* "pyOpenDRIVE/XmlNode.pxd":20
- *         xml_node xml_node
+/* "pyOpenDRIVE/XmlNode.pxd":48
+ *         xml_node node "xml_node"
  * 
  * cdef class PyXmlNode:             # <<<<<<<<<<<<<<
  *     cdef shared_ptr[XmlNode] c_self

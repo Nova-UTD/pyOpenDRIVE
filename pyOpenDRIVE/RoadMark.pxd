@@ -2,8 +2,6 @@
 
 cdef extern from "../src/RoadMark.cpp":
     pass
-cdef extern from "pugixml/pugixml.cpp" namespace "pugi":
-    pass
 
 from libcpp.vector cimport vector
 from libcpp.map cimport map
@@ -12,8 +10,10 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
+from pyOpenDrive.XmlNode cimport XmlNode
+
 cdef extern from "RoadMark.h" namespace "odr":
-    cdef cppclass RoadMarksLine:
+    cdef cppclass RoadMarksLine(XmlNode):
         RoadMarksLine(string road_id, double lanesection_s0, int lane_id, double group_s0, double width, double length, double space, double t_offset, double s_offset, string name, string rule) except +
 
         string road_id
@@ -30,7 +30,7 @@ cdef extern from "RoadMark.h" namespace "odr":
         string name
         string rule
         
-    cdef cppclass RoadMarkGroup:
+    cdef cppclass RoadMarkGroup(XmlNode):
         RoadMarkGroup(string road_id, double lanesection_s0, int lane_id, double width, double height, double s_offset, string type, string weight, string color, string material, string lane_change) except +
 
         string road_id

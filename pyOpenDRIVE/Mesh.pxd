@@ -14,14 +14,9 @@ cdef extern from "<cstdint>" namespace "std":
     cdef cppclass uint32_t
 
 from pyOpenDrive.Array cimport array
+from pyOpenDrive.Math cimport Vec3D, Line3D, Vec2D
 
 cdef extern from "Mesh.h" namespace "odr":
-    ctypedef int dim_3 "3"
-    ctypedef int dim_2 "2"
-
-    ctypedef array[double, dim_2] Vec2D
-    ctypedef array[double, dim_3] Vec3D
-
     cdef cppclass Mesh3D:
         Mesh3D() except +
 

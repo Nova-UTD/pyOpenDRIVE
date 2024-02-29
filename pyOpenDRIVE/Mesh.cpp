@@ -5,6 +5,7 @@
     "distutils": {
         "depends": [
             "pyOpenDRIVE\\Mesh.h",
+            "pyOpenDrive\\Math.hpp",
             "pyOpenDrive\\Mesh.h",
             "src\\Mesh.cpp"
         ],
@@ -1244,6 +1245,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include <memory>
 #include <cstdint>
 #include <array>
+#include "Math.hpp"
 #include "Mesh.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1528,7 +1530,7 @@ static const char *__pyx_f[] = {
 struct __pyx_obj_11pyOpenDrive_4Mesh_PyMesh3D;
 struct __pyx_obj_11pyOpenDRIVE_4Mesh_PyMesh3D;
 
-/* "pyOpenDrive/Mesh.pxd":36
+/* "pyOpenDrive/Mesh.pxd":31
  *         vector[Vec2D] st_coordinates
  * 
  * cdef class PyMesh3D:             # <<<<<<<<<<<<<<
@@ -1540,7 +1542,7 @@ struct __pyx_obj_11pyOpenDrive_4Mesh_PyMesh3D {
 };
 
 
-/* "pyOpenDRIVE/Mesh.pxd":36
+/* "pyOpenDRIVE/Mesh.pxd":31
  *         vector[Vec2D] st_coordinates
  * 
  * cdef class PyMesh3D:             # <<<<<<<<<<<<<<
@@ -2215,6 +2217,8 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from "pyOpenDrive.Array" */
 
+/* Module declarations from "pyOpenDrive.Math" */
+
 /* Module declarations from "pyOpenDrive.Mesh" */
 
 /* Module declarations from "pyOpenDRIVE.Mesh" */
@@ -2285,6 +2289,8 @@ typedef struct {
   #endif
   #ifdef __Pyx_Coroutine_USED
   PyTypeObject *__pyx_CoroutineType;
+  #endif
+  #if CYTHON_USE_MODULE_STATE
   #endif
   #if CYTHON_USE_MODULE_STATE
   #endif
@@ -2496,6 +2502,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #endif
 #ifdef __Pyx_Coroutine_USED
 #define __pyx_CoroutineType __pyx_mstate_global->__pyx_CoroutineType
+#endif
+#if CYTHON_USE_MODULE_STATE
 #endif
 #if CYTHON_USE_MODULE_STATE
 #endif
@@ -3159,9 +3167,9 @@ static int __Pyx_modinit_type_import_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
-  __pyx_t_1 = PyImport_ImportModule("pyOpenDrive.Mesh"); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 36, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("pyOpenDrive.Mesh"); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_ptype_11pyOpenDrive_4Mesh_PyMesh3D = __Pyx_ImportType_3_0_8(__pyx_t_1, "pyOpenDrive.Mesh", "PyMesh3D", sizeof(struct __pyx_obj_11pyOpenDrive_4Mesh_PyMesh3D), __PYX_GET_STRUCT_ALIGNMENT_3_0_8(struct __pyx_obj_11pyOpenDrive_4Mesh_PyMesh3D),__Pyx_ImportType_CheckSize_Warn_3_0_8); if (!__pyx_ptype_11pyOpenDrive_4Mesh_PyMesh3D) __PYX_ERR(2, 36, __pyx_L1_error)
+  __pyx_ptype_11pyOpenDrive_4Mesh_PyMesh3D = __Pyx_ImportType_3_0_8(__pyx_t_1, "pyOpenDrive.Mesh", "PyMesh3D", sizeof(struct __pyx_obj_11pyOpenDrive_4Mesh_PyMesh3D), __PYX_GET_STRUCT_ALIGNMENT_3_0_8(struct __pyx_obj_11pyOpenDrive_4Mesh_PyMesh3D),__Pyx_ImportType_CheckSize_Warn_3_0_8); if (!__pyx_ptype_11pyOpenDrive_4Mesh_PyMesh3D) __PYX_ERR(2, 31, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;

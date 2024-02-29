@@ -4,10 +4,12 @@
 {
     "distutils": {
         "depends": [
-            "pyOpenDRIVE\\LaneValidityRecord.h"
+            "pyOpenDRIVE\\LaneValidityRecord.h",
+            "pyOpenDrive\\XmlNode.h"
         ],
         "include_dirs": [
-            "pyOpenDRIVE"
+            "pyOpenDRIVE",
+            "pyOpenDrive"
         ],
         "language": "c++",
         "name": "pyOpenDRIVE.LaneValidityRecord",
@@ -1215,12 +1217,32 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__pyOpenDRIVE__LaneValidityRecord
 #define __PYX_HAVE_API__pyOpenDRIVE__LaneValidityRecord
 /* Early includes */
-#include "pugixml/pugixml.cpp"
 #include "ios"
 #include "new"
 #include "stdexcept"
 #include "typeinfo"
 #include <memory>
+#include "pugixml/pugixml.cpp"
+#include <vector>
+#include <utility>
+
+    #if __cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1600)
+    // move should be defined for these versions of MSVC, but __cplusplus isn't set usefully
+    #include <type_traits>
+
+    namespace cython_std {
+    template <typename T> typename std::remove_reference<T>::type&& move(T& t) noexcept { return std::move(t); }
+    template <typename T> typename std::remove_reference<T>::type&& move(T&& t) noexcept { return std::move(t); }
+    }
+
+    #endif
+    
+#include <map>
+#include <set>
+#include <string.h>
+#include <string>
+#include "pugixml/pugixml.hpp"
+#include "XmlNode.h"
 #include "LaneValidityRecord.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1489,6 +1511,7 @@ static const char *__pyx_filename;
 static const char *__pyx_f[] = {
   "<stringsource>",
   "pyOpenDRIVE\\\\LaneValidityRecord.pyx",
+  "pyOpenDrive\\\\XmlNode.pxd",
 };
 /* #### Code section: utility_code_proto_before_types ### */
 /* ForceInitThreads.proto */
@@ -1501,9 +1524,22 @@ static const char *__pyx_f[] = {
 /* #### Code section: type_declarations ### */
 
 /*--- Type declarations ---*/
+struct __pyx_obj_11pyOpenDrive_7XmlNode_PyXmlNode;
 struct __pyx_obj_11pyOpenDRIVE_18LaneValidityRecord_PyLaneValidityRecord;
 
-/* "pyOpenDRIVE/LaneValidityRecord.pxd":15
+/* "pyOpenDrive/XmlNode.pxd":48
+ *         xml_node node "xml_node"
+ * 
+ * cdef class PyXmlNode:             # <<<<<<<<<<<<<<
+ *     cdef shared_ptr[XmlNode] c_self
+ */
+struct __pyx_obj_11pyOpenDrive_7XmlNode_PyXmlNode {
+  PyObject_HEAD
+  std::shared_ptr<odr::XmlNode>  c_self;
+};
+
+
+/* "pyOpenDRIVE/LaneValidityRecord.pxd":17
  *         int to_lane
  * 
  * cdef class PyLaneValidityRecord:             # <<<<<<<<<<<<<<
@@ -1849,6 +1885,25 @@ static PyObject* __Pyx_PyObject_GenericGetAttr(PyObject* obj, PyObject* attr_nam
 static int __Pyx_setup_reduce(PyObject* type_obj);
 #endif
 
+/* TypeImport.proto */
+#ifndef __PYX_HAVE_RT_ImportType_proto_3_0_8
+#define __PYX_HAVE_RT_ImportType_proto_3_0_8
+#if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+#include <stdalign.h>
+#endif
+#if (defined (__STDC_VERSION__) && __STDC_VERSION__ >= 201112L) || __cplusplus >= 201103L
+#define __PYX_GET_STRUCT_ALIGNMENT_3_0_8(s) alignof(s)
+#else
+#define __PYX_GET_STRUCT_ALIGNMENT_3_0_8(s) sizeof(void*)
+#endif
+enum __Pyx_ImportType_CheckSize_3_0_8 {
+   __Pyx_ImportType_CheckSize_Error_3_0_8 = 0,
+   __Pyx_ImportType_CheckSize_Warn_3_0_8 = 1,
+   __Pyx_ImportType_CheckSize_Ignore_3_0_8 = 2
+};
+static PyTypeObject *__Pyx_ImportType_3_0_8(PyObject* module, const char *module_name, const char *class_name, size_t size, size_t alignment, enum __Pyx_ImportType_CheckSize_3_0_8 check_size);
+#endif
+
 /* FetchSharedCythonModule.proto */
 static PyObject *__Pyx_FetchSharedCythonABIModule(void);
 
@@ -2145,6 +2200,20 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from "libcpp.memory" */
 
+/* Module declarations from "libcpp.vector" */
+
+/* Module declarations from "libcpp.utility" */
+
+/* Module declarations from "libcpp.map" */
+
+/* Module declarations from "libcpp.set" */
+
+/* Module declarations from "libc.string" */
+
+/* Module declarations from "libcpp.string" */
+
+/* Module declarations from "pyOpenDrive.XmlNode" */
+
 /* Module declarations from "pyOpenDrive" */
 
 /* Module declarations from "pyOpenDRIVE.LaneValidityRecord" */
@@ -2225,6 +2294,21 @@ typedef struct {
   #if CYTHON_USE_MODULE_STATE
   #endif
   #if CYTHON_USE_MODULE_STATE
+  #endif
+  #if CYTHON_USE_MODULE_STATE
+  #endif
+  #if CYTHON_USE_MODULE_STATE
+  #endif
+  #if CYTHON_USE_MODULE_STATE
+  #endif
+  #if CYTHON_USE_MODULE_STATE
+  #endif
+  #if CYTHON_USE_MODULE_STATE
+  #endif
+  PyTypeObject *__pyx_ptype_11pyOpenDrive_7XmlNode_PyXmlNode;
+  #if CYTHON_USE_MODULE_STATE
+  #endif
+  #if CYTHON_USE_MODULE_STATE
   PyObject *__pyx_type_11pyOpenDRIVE_18LaneValidityRecord_PyLaneValidityRecord;
   #endif
   PyTypeObject *__pyx_ptype_11pyOpenDRIVE_18LaneValidityRecord_PyLaneValidityRecord;
@@ -2302,6 +2386,7 @@ static int __pyx_m_clear(PyObject *m) {
   #ifdef __Pyx_FusedFunction_USED
   Py_CLEAR(clear_module_state->__pyx_FusedFunctionType);
   #endif
+  Py_CLEAR(clear_module_state->__pyx_ptype_11pyOpenDrive_7XmlNode_PyXmlNode);
   Py_CLEAR(clear_module_state->__pyx_ptype_11pyOpenDRIVE_18LaneValidityRecord_PyLaneValidityRecord);
   Py_CLEAR(clear_module_state->__pyx_type_11pyOpenDRIVE_18LaneValidityRecord_PyLaneValidityRecord);
   Py_CLEAR(clear_module_state->__pyx_n_s_PyLaneValidityRecord);
@@ -2356,6 +2441,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   #ifdef __Pyx_FusedFunction_USED
   Py_VISIT(traverse_module_state->__pyx_FusedFunctionType);
   #endif
+  Py_VISIT(traverse_module_state->__pyx_ptype_11pyOpenDrive_7XmlNode_PyXmlNode);
   Py_VISIT(traverse_module_state->__pyx_ptype_11pyOpenDRIVE_18LaneValidityRecord_PyLaneValidityRecord);
   Py_VISIT(traverse_module_state->__pyx_type_11pyOpenDRIVE_18LaneValidityRecord_PyLaneValidityRecord);
   Py_VISIT(traverse_module_state->__pyx_n_s_PyLaneValidityRecord);
@@ -2422,6 +2508,21 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #endif
 #if CYTHON_USE_MODULE_STATE
 #endif
+#if CYTHON_USE_MODULE_STATE
+#endif
+#if CYTHON_USE_MODULE_STATE
+#endif
+#if CYTHON_USE_MODULE_STATE
+#endif
+#if CYTHON_USE_MODULE_STATE
+#endif
+#if CYTHON_USE_MODULE_STATE
+#endif
+#if CYTHON_USE_MODULE_STATE
+#endif
+#if CYTHON_USE_MODULE_STATE
+#endif
+#define __pyx_ptype_11pyOpenDrive_7XmlNode_PyXmlNode __pyx_mstate_global->__pyx_ptype_11pyOpenDrive_7XmlNode_PyXmlNode
 #if CYTHON_USE_MODULE_STATE
 #endif
 #if CYTHON_USE_MODULE_STATE
@@ -3133,10 +3234,22 @@ static int __Pyx_modinit_type_init_code(void) {
 
 static int __Pyx_modinit_type_import_code(void) {
   __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_import_code", 0);
   /*--- Type import code ---*/
+  __pyx_t_1 = PyImport_ImportModule("pyOpenDrive.XmlNode"); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 48, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_ptype_11pyOpenDrive_7XmlNode_PyXmlNode = __Pyx_ImportType_3_0_8(__pyx_t_1, "pyOpenDrive.XmlNode", "PyXmlNode", sizeof(struct __pyx_obj_11pyOpenDrive_7XmlNode_PyXmlNode), __PYX_GET_STRUCT_ALIGNMENT_3_0_8(struct __pyx_obj_11pyOpenDrive_7XmlNode_PyXmlNode),__Pyx_ImportType_CheckSize_Warn_3_0_8); if (!__pyx_ptype_11pyOpenDrive_7XmlNode_PyXmlNode) __PYX_ERR(2, 48, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_modinit_variable_import_code(void) {
@@ -3425,7 +3538,7 @@ if (!__Pyx_RefNanny) {
   (void)__Pyx_modinit_variable_export_code();
   (void)__Pyx_modinit_function_export_code();
   if (unlikely((__Pyx_modinit_type_init_code() < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
-  (void)__Pyx_modinit_type_import_code();
+  if (unlikely((__Pyx_modinit_type_import_code() < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
   (void)__Pyx_modinit_variable_import_code();
   (void)__Pyx_modinit_function_import_code();
   /*--- Execution code ---*/
@@ -5127,6 +5240,86 @@ __PYX_GOOD:
     Py_XDECREF(setstate);
     Py_XDECREF(setstate_cython);
     return ret;
+}
+#endif
+
+/* TypeImport */
+#ifndef __PYX_HAVE_RT_ImportType_3_0_8
+#define __PYX_HAVE_RT_ImportType_3_0_8
+static PyTypeObject *__Pyx_ImportType_3_0_8(PyObject *module, const char *module_name, const char *class_name,
+    size_t size, size_t alignment, enum __Pyx_ImportType_CheckSize_3_0_8 check_size)
+{
+    PyObject *result = 0;
+    char warning[200];
+    Py_ssize_t basicsize;
+    Py_ssize_t itemsize;
+#if CYTHON_COMPILING_IN_LIMITED_API
+    PyObject *py_basicsize;
+    PyObject *py_itemsize;
+#endif
+    result = PyObject_GetAttrString(module, class_name);
+    if (!result)
+        goto bad;
+    if (!PyType_Check(result)) {
+        PyErr_Format(PyExc_TypeError,
+            "%.200s.%.200s is not a type object",
+            module_name, class_name);
+        goto bad;
+    }
+#if !CYTHON_COMPILING_IN_LIMITED_API
+    basicsize = ((PyTypeObject *)result)->tp_basicsize;
+    itemsize = ((PyTypeObject *)result)->tp_itemsize;
+#else
+    py_basicsize = PyObject_GetAttrString(result, "__basicsize__");
+    if (!py_basicsize)
+        goto bad;
+    basicsize = PyLong_AsSsize_t(py_basicsize);
+    Py_DECREF(py_basicsize);
+    py_basicsize = 0;
+    if (basicsize == (Py_ssize_t)-1 && PyErr_Occurred())
+        goto bad;
+    py_itemsize = PyObject_GetAttrString(result, "__itemsize__");
+    if (!py_itemsize)
+        goto bad;
+    itemsize = PyLong_AsSsize_t(py_itemsize);
+    Py_DECREF(py_itemsize);
+    py_itemsize = 0;
+    if (itemsize == (Py_ssize_t)-1 && PyErr_Occurred())
+        goto bad;
+#endif
+    if (itemsize) {
+        if (size % alignment) {
+            alignment = size % alignment;
+        }
+        if (itemsize < (Py_ssize_t)alignment)
+            itemsize = (Py_ssize_t)alignment;
+    }
+    if ((size_t)(basicsize + itemsize) < size) {
+        PyErr_Format(PyExc_ValueError,
+            "%.200s.%.200s size changed, may indicate binary incompatibility. "
+            "Expected %zd from C header, got %zd from PyObject",
+            module_name, class_name, size, basicsize+itemsize);
+        goto bad;
+    }
+    if (check_size == __Pyx_ImportType_CheckSize_Error_3_0_8 &&
+            ((size_t)basicsize > size || (size_t)(basicsize + itemsize) < size)) {
+        PyErr_Format(PyExc_ValueError,
+            "%.200s.%.200s size changed, may indicate binary incompatibility. "
+            "Expected %zd from C header, got %zd-%zd from PyObject",
+            module_name, class_name, size, basicsize, basicsize+itemsize);
+        goto bad;
+    }
+    else if (check_size == __Pyx_ImportType_CheckSize_Warn_3_0_8 && (size_t)basicsize > size) {
+        PyOS_snprintf(warning, sizeof(warning),
+            "%s.%s size changed, may indicate binary incompatibility. "
+            "Expected %zd from C header, got %zd from PyObject",
+            module_name, class_name, size, basicsize);
+        if (PyErr_WarnEx(NULL, warning, 0) < 0) goto bad;
+    }
+    return (PyTypeObject *)result;
+bad:
+    Py_XDECREF(result);
+    return NULL;
 }
 #endif
 

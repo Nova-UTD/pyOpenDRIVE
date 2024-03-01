@@ -1,6 +1,7 @@
 # distutils: language=c++
 
 from pyOpenDrive cimport OpenDriveMap
+from pyOpenDrive.Road import PyRoad
 
 cdef class PyOpenDriveMap:
     def __cinit__(self, const string& xodr_file, bool center_map = False, bool with_road_objects = True, bool with_lateral_profile = True, bool with_lane_height = True, bool abs_z_for_for_local_road_obj_outline = False, bool fix_spiral_edge_cases = True, bool with_road_signals = True):
@@ -18,10 +19,10 @@ cdef class PyOpenDriveMap:
     def get_junctions(self):
         return self.c_self.get().get_junctions()
     
-    def get_road_network_mesh(const double eps):
-        return self.c_self.get().get_road_network_mesh()
+    def get_road_network_mesh(self, const double eps):
+        return self.c_self.get().get_road_network_mesh(eps)
 
-    def get_routing_graph():
+    def get_routing_graph(self):
         return self.c_self.get().get_routing_graph()
 
     @property

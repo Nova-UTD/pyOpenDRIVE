@@ -41,6 +41,11 @@ cdef extern from "pugixml/pugixml.hpp" namespace "pugi":
         const char_t* name() const
         const char_t* value() const
 
+    # This likely doesn't need to be wrapped, just included to prevent type error
+    cdef cppclass xml_document(xml_node):
+        xml_document() except +
+
+
 cdef extern from "XmlNode.h" namespace "odr":
     cdef cppclass XmlNode:
         xml_node node "xml_node"

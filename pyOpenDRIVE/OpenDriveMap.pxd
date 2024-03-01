@@ -9,8 +9,9 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
-from pyOpenDrive.XmlNode cimport XmlNode
+from pyOpenDrive.XmlNode cimport XmlNode, xml_document
 from pyOpenDrive.Road cimport Road
+from pyOpenDrive.Junction cimport Junction
 
 cdef extern from "OpenDriveMap.h" namespace "odr":
     cdef cppclass OpenDriveMap:

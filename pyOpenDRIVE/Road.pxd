@@ -13,16 +13,16 @@ from libcpp.memory cimport make_shared, shared_ptr
 cdef extern from "<cstdint>" namespace "std":
     cdef cppclass uint32_t
 
-from pyOpenDrive.Lane cimport Lane
-from pyOpenDrive.LaneSection cimport LaneSection
-from pyOpenDrive.CubicSpline cimport CubicSpline
-from pyOpenDrive.Array cimport array
-from pyOpenDrive.Mesh cimport Mesh3D
-from pyOpenDrive.RoadMark cimport RoadMark
-from pyOpenDrive.Math cimport Vec3D, Line3D
-from pyOpenDrive.RoadObject cimport RoadObject
-from pyOpenDrive.RoadSignal cimport RoadSignal
-from pyOpenDrive.RefLine cimport RefLine
+from pyOpenDRIVE.Lane cimport Lane
+from pyOpenDRIVE.LaneSection cimport LaneSection
+from pyOpenDRIVE.CubicSpline cimport CubicSpline
+from pyOpenDRIVE.Array cimport array
+from pyOpenDRIVE.Mesh cimport Mesh3D
+from pyOpenDRIVE.RoadMark cimport RoadMark
+from pyOpenDRIVE.Math cimport Vec3D, Line3D
+from pyOpenDRIVE.RoadObject cimport RoadObject
+from pyOpenDRIVE.RoadSignal cimport RoadSignal
+from pyOpenDRIVE.RefLine cimport RefLine
 
 cdef extern from "Road.h" namespace "odr":
     cdef cppclass Crossfall:
@@ -118,4 +118,11 @@ cdef extern from "Road.h" namespace "odr":
         map[string, RoadSignal] id_to_signal
 
 cdef class PyRoad:
+    @staticmethod
+    cdef inline PyRoad wrap(Road& rd):
+        return PyRoad(rd.id, rd.length, rd.junction, rd.name, rd.left_hand_traffic)
+
+    cdef inline Road* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[Road] c_self

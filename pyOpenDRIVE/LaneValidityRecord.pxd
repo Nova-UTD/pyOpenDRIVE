@@ -5,7 +5,7 @@
 
 from libcpp.memory cimport make_shared, shared_ptr
 
-from pyOpenDrive.XmlNode cimport XmlNode
+from pyOpenDRIVE.XmlNode cimport XmlNode
 
 cdef extern from "LaneValidityRecord.h" namespace "odr":
     cdef cppclass LaneValidityRecord(XmlNode):

@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive cimport XmlNode
+from pyOpenDRIVE cimport XmlNode
 
 cdef class PyXmlNode:
     def __cinit__(self):

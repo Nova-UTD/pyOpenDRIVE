@@ -10,8 +10,8 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
-from pyOpenDrive.CubicSpline cimport CubicSpline
-from pyOpenDrive.RoadMark cimport RoadMark, RoadMarkGroup
+from pyOpenDRIVE.CubicSpline cimport CubicSpline
+from pyOpenDRIVE.RoadMark cimport RoadMark, RoadMarkGroup
 
 cdef extern from "Lane.h" namespace "odr":
     cdef cppclass HeightOffset:

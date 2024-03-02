@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive cimport Junction
+from pyOpenDRIVE cimport Junction
 
 cdef class PyJunction:
     def __cinit__(self, string name, string id):

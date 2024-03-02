@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive cimport RoadObject
+from pyOpenDRIVE cimport RoadObject
 
 cdef class PyRoadObject:
     def __cinit__(self, string road_id, string id, double s0, double t0, double z0, double length, double valid_length, double width, double radius, double height, double hdg, double pitch, double roll, string type, string name, string orientation, string subtype, bool is_dynamic):

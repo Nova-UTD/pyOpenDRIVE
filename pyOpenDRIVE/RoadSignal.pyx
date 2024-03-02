@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive cimport RoadSignal
+from pyOpenDRIVE cimport RoadSignal
 
 cdef class PyRoadSignal:
     def __cinit__(self, string road_id, string id, string name, double s0, double t0, bool is_dynamic, double zOffset, double value, double height, double width, double hOffset, double pitch, double roll, string orientation, string country, string type, string subtype, string unit, string text):

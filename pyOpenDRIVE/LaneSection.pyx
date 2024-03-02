@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive cimport LaneSection
+from pyOpenDRIVE cimport LaneSection
 
 cdef class PyLaneSection:
     def __cinit__(self, string road_id, double s0):

@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive cimport RefLine
+from pyOpenDRIVE cimport RefLine
 
 cdef class PyRefLine:
     def __cinit__(self, string road_id, double length):

@@ -10,9 +10,9 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
-from pyOpenDrive.XmlNode cimport XmlNode
-from pyOpenDrive.Mesh cimport Mesh3D
-from pyOpenDrive.LaneValidityRecord cimport LaneValidityRecord
+from pyOpenDRIVE.XmlNode cimport XmlNode
+from pyOpenDRIVE.Mesh cimport Mesh3D
+from pyOpenDRIVE.LaneValidityRecord cimport LaneValidityRecord
 
 cdef extern from "RoadSignal.h" namespace "odr":
     cdef cppclass RoadSignal(XmlNode):

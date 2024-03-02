@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive cimport RoadMark
+from pyOpenDRIVE cimport RoadMark
 
 cdef class PyRoadMark:
     def __cinit__(self, string road_id, double lanesection_s0, int lane_id, double group_s0, double s_start, double s_end, double t_offset, double width, string type):

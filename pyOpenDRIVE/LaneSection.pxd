@@ -10,7 +10,7 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
-from pyOpenDrive.Lane cimport Lane
+from pyOpenDRIVE.Lane cimport Lane
 
 cdef extern from "LaneSection.h" namespace "odr":
     cdef cppclass LaneSection:

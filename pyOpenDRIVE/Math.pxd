@@ -1,7 +1,7 @@
 # distutils: language=c++
 
 from libcpp.vector cimport vector
-from pyOpenDrive.Array cimport array
+from pyOpenDRIVE.Array cimport array
 
 cdef extern from "Math.hpp" namespace "odr":
     ctypedef int dim_3 "3"

@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive cimport XmlNode
+from pyOpenDRIVE cimport XmlNode
 
 cdef class PyCubicSpline:
     def __cinit__(self):

@@ -3,15 +3,28 @@
 cdef extern from "../src/OpenDriveMap.cpp":
     pass
 
+cdef extern from "../src/Geometries/Spiral.cpp":
+    pass
+cdef extern from "../src/Geometries/Spiral/odrSpiral.cpp":
+    pass
+cdef extern from "../src/Geometries/ParamPoly3.cpp":
+    pass
+cdef extern from "../src/Geometries/Arc.cpp":
+    pass
+cdef extern from "../src/Geometries/Line.cpp":
+    pass
+
 from libcpp.vector cimport vector
 from libcpp.map cimport map
 from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
-from pyOpenDrive.XmlNode cimport XmlNode, xml_document
-from pyOpenDrive.Road cimport Road
-from pyOpenDrive.Junction cimport Junction
+from pyOpenDRIVE.XmlNode cimport XmlNode, xml_document
+from pyOpenDRIVE.Road cimport Road
+from pyOpenDRIVE.Junction cimport Junction
+from pyOpenDRIVE.RoadNetworkMesh cimport RoadNetworkMesh
+from pyOpenDRIVE.RoutingGraph cimport RoutingGraph
 
 cdef extern from "OpenDriveMap.h" namespace "odr":
     cdef cppclass OpenDriveMap:

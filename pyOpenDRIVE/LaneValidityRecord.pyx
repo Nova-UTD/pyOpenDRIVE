@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive cimport LaneValidityRecord
+from pyOpenDRIVE cimport LaneValidityRecord
 
 cdef class PyLaneValidityRecord:
     def __cinit__(self, int from_lane, int to_lane):

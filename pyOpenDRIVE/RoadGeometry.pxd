@@ -10,8 +10,8 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr, unique_ptr
 
-from pyOpenDrive.XmlNode cimport XmlNode
-from pyOpenDrive.Math cimport Vec2D
+from pyOpenDRIVE.XmlNode cimport XmlNode
+from pyOpenDRIVE.Math cimport Vec2D
 
 cdef extern from "Geometries/RoadGeometry.h" namespace "odr":
     cdef enum GeometryType:

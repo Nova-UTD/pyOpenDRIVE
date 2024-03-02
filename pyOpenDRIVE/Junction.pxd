@@ -10,7 +10,7 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
-from pyOpenDrive.XmlNode cimport XmlNode
+from pyOpenDRIVE.XmlNode cimport XmlNode
 
 cdef extern from "<cstdint>" namespace "std":
     cdef cppclass uint32_t

@@ -10,9 +10,9 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr, unique_ptr
 
-from pyOpenDrive.Math cimport Vec3D, Line3D
-from pyOpenDrive.CubicSpline cimport CubicSpline
-from pyOpenDrive.RoadGeometry cimport RoadGeometry
+from pyOpenDRIVE.Math cimport Vec3D, Line3D
+from pyOpenDRIVE.CubicSpline cimport CubicSpline
+from pyOpenDRIVE.RoadGeometry cimport RoadGeometry
 
 cdef extern from "RefLine.h" namespace "odr":
     cdef cppclass RefLine:

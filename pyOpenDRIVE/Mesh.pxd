@@ -13,8 +13,8 @@ from libcpp.memory cimport make_shared, shared_ptr
 cdef extern from "<cstdint>" namespace "std":
     cdef cppclass uint32_t
 
-from pyOpenDrive.Array cimport array
-from pyOpenDrive.Math cimport Vec3D, Line3D, Vec2D
+from pyOpenDRIVE.Array cimport array
+from pyOpenDRIVE.Math cimport Vec3D, Line3D, Vec2D
 
 cdef extern from "Mesh.h" namespace "odr":
     cdef cppclass Mesh3D:

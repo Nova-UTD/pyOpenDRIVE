@@ -1,6 +1,6 @@
 # distutils: language=c++
 
-from pyOpenDrive.Mesh cimport Mesh3D
+from pyOpenDRIVE.Mesh cimport Mesh3D
 
 cdef class PyMesh3D:
     def __cinit__(self):

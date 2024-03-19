@@ -119,8 +119,10 @@ cdef extern from "Road.h" namespace "odr":
 
 cdef class PyRoad:
     @staticmethod
-    cdef inline PyRoad wrap(Road& rd):
-        return PyRoad(rd.id, rd.length, rd.junction, rd.name, rd.left_hand_traffic)
+    cdef inline PyRoad wrap(const Road& c_obj):
+        temp = PyRoad()
+        temp.c_self = make_shared[Road](c_obj)
+        return temp
 
     cdef inline Road* unwrap(this):
         return this.c_self.get()

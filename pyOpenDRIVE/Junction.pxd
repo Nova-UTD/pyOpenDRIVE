@@ -62,4 +62,13 @@ cdef extern from "Junction.h" namespace "odr":
         set[JunctionPriority] priorities
 
 cdef class PyJunction:
+    @staticmethod
+    cdef inline PyJunction wrap(const Junction& c_obj):
+        temp = PyJunction()
+        temp.c_self = make_shared[Junction](c_obj)
+        return temp
+
+    cdef inline Junction* unwrap(this):
+        return this.c_self.get()
+        
     cdef shared_ptr[Junction] c_self

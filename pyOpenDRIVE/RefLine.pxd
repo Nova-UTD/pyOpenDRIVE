@@ -39,4 +39,13 @@ cdef extern from "RefLine.h" namespace "odr":
         map[double, unique_ptr[RoadGeometry]] s0_to_geometry
 
 cdef class PyRefLine:
+    @staticmethod
+    cdef inline PyRefLine wrap(const RefLine& c_obj):
+        temp = PyRefLine()
+        temp.c_self = make_shared[RefLine](c_obj)
+        return temp
+
+    cdef inline RefLine* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[RefLine] c_self

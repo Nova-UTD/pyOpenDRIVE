@@ -39,4 +39,13 @@ cdef extern from "RoutingGraph.h" namespace "odr":
         unordered_map[LaneKey, unordered_set[WeightedLaneKey]] lane_key_to_predecessors
 
 cdef class PyRoutingGraph:
+    @staticmethod
+    cdef inline PyRoutingGraph wrap(const RoutingGraph& c_obj):
+        temp = PyRoutingGraph()
+        temp.c_self = make_shared[RoutingGraph](c_obj)
+        return temp
+
+    cdef inline RoutingGraph* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[RoutingGraph] c_self

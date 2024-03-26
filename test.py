@@ -10,7 +10,7 @@ if (len(sys.argv) < 2):
     print("ERROR: too few arguments\n")
     exit(-1)
 
-odr_map = PyOpenDriveMap(sys.argv[1])
+odr_map = PyOpenDriveMap(sys.argv[1].encode())
 eps: float = 0.1
 
 lane_pts = []

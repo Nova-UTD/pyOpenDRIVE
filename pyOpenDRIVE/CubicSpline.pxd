@@ -46,4 +46,13 @@ cdef extern from "Geometries/CubicSpline.h" namespace "odr":
         map[double, Poly3] s0_to_poly
 
 cdef class PyCubicSpline:
+    @staticmethod
+    cdef inline PyCubicSpline wrap(const CubicSpline& c_obj):
+        temp = PyCubicSpline()
+        temp.c_self = make_shared[CubicSpline](c_obj)
+        return temp
+
+    cdef inline CubicSpline* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[CubicSpline] c_self

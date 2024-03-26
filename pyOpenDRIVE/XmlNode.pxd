@@ -45,10 +45,34 @@ cdef extern from "pugixml/pugixml.hpp" namespace "pugi":
     cdef cppclass xml_document(xml_node):
         xml_document() except +
 
+        void reset()
+        void reset(const xml_document& proto)
 
 cdef extern from "XmlNode.h" namespace "odr":
     cdef cppclass XmlNode:
         xml_node node "xml_node"
 
 cdef class PyXmlNode:
+    @staticmethod
+    cdef inline PyXmlNode wrap(const XmlNode& c_obj):
+        temp = PyXmlNode()
+        temp.c_self = make_shared[XmlNode](c_obj)
+        return temp
+
+    cdef inline XmlNode* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[XmlNode] c_self
+
+cdef class PyXmlDocument:
+    @staticmethod
+    cdef inline PyXmlDocument wrap(const xml_document& c_obj):
+        temp = PyXmlDocument()
+        temp.c_self = make_shared[xml_document]()
+        temp.unwrap().reset(c_obj)
+        return temp
+
+    cdef inline xml_document* unwrap(this):
+        return this.c_self.get()
+
+    cdef shared_ptr[xml_document] c_self

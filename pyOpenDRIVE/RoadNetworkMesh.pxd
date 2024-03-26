@@ -67,4 +67,13 @@ cdef extern from "RoadNetworkMesh.h" namespace "odr":
         RoadSignalsMesh road_signals_mesh
 
 cdef class PyRoadNetworkMesh:
+    @staticmethod
+    cdef inline PyRoadNetworkMesh wrap(const RoadNetworkMesh& c_obj):
+        temp = PyRoadNetworkMesh()
+        temp.c_self = make_shared[RoadNetworkMesh](c_obj)
+        return temp
+
+    cdef inline RoadNetworkMesh* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[RoadNetworkMesh] c_self

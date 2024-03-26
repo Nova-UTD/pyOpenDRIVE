@@ -117,6 +117,42 @@ cdef extern from "Road.h" namespace "odr":
         map[string, RoadObject] id_to_object
         map[string, RoadSignal] id_to_signal
 
+cdef class PyCrossfall:
+    @staticmethod
+    cdef inline PyCrossfall wrap(const Crossfall& c_obj):
+        temp = PyCrossfall()
+        temp.c_self = make_shared[Crossfall](c_obj)
+        return temp
+
+    cdef inline Crossfall* unwrap(this):
+        return this.c_self.get()
+
+    cdef shared_ptr[Crossfall] c_self
+
+cdef class PyRoadLink:
+    @staticmethod
+    cdef inline PyRoadLink wrap(const RoadLink& c_obj):
+        temp = PyRoadLink()
+        temp.c_self = make_shared[RoadLink](c_obj)
+        return temp
+
+    cdef inline RoadLink* unwrap(this):
+        return this.c_self.get()
+
+    cdef shared_ptr[RoadLink] c_self
+
+cdef class PyRoadNeighbor:
+    @staticmethod
+    cdef inline PyRoadNeighbor wrap(const RoadNeighbor& c_obj):
+        temp = PyRoadNeighbor()
+        temp.c_self = make_shared[RoadNeighbor](c_obj)
+        return temp
+
+    cdef inline RoadNeighbor* unwrap(this):
+        return this.c_self.get()
+
+    cdef shared_ptr[RoadNeighbor] c_self
+
 cdef class PyRoad:
     @staticmethod
     cdef inline PyRoad wrap(const Road& c_obj):

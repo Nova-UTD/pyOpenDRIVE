@@ -2,7 +2,6 @@
 
 cdef extern from "../src/OpenDriveMap.cpp":
     pass
-
 cdef extern from "../src/Geometries/Spiral.cpp":
     pass
 cdef extern from "../src/Geometries/Spiral/odrSpiral.cpp":
@@ -46,4 +45,7 @@ cdef extern from "OpenDriveMap.h" namespace "odr":
         map[string, Junction] id_to_junction
 
 cdef class PyOpenDriveMap:
+    cdef inline OpenDriveMap* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[OpenDriveMap] c_self

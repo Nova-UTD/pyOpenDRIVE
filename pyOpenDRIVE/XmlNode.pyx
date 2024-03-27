@@ -8,11 +8,11 @@ cdef class Py_xml_node:
 
 cdef class PyXmlNode:
     def __cinit__(self):
-        self.c_self = make_shared[XmlNode]()
+        self.node_ptr = make_shared[XmlNode]()
 
     @property
     def xml_node(self):
-        return Py_xml_node.wrap_node(self.unwrap().node)
+        return Py_xml_node.wrap_node(self.unwrap_node().node)
 
 cdef class Py_xml_document(Py_xml_node):
     def __cinit__(self):

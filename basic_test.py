@@ -8,19 +8,23 @@ odr_map = PyOpenDriveMap(b"./test.xodr")
 roads: list[PyRoad] = odr_map.get_roads()
 junctions: list[PyJunction] = odr_map.get_junctions()
 
-print("\nROADS:")
+print("\nROADS: [")
 for road in roads:
     lanesections: list[PyLaneSection] = road.get_lanesections()
-    print("---BEGIN ROAD---")
-    print(f"Road ID: {road.id}")
-    print("---BEGIN LANESECTIONS---")
+    print("\tRoad {")
+    print(f"\t\tRoad ID: {road.id}")
+    print("\t\tLaneSections {")
     for lanesec in lanesections:
-        print(f"Assoc. Road ID: {lanesec.road_id}; S0: {lanesec.s0}; # Lanes: {len(lanesec.id_to_lane.keys())}")
-    print("---END LANESECTIONS--")
-    print("---END ROAD---\n")
+        print(f"\t\t\tAssoc. Road ID: {lanesec.road_id}; S0: {lanesec.s0}; # Lanes: {len(lanesec.id_to_lane.keys())}")
+    print("\t\t}")
+    print("\t}\n")
+print("]")
 
-print("\nJUNCTIONS:")
+print("\nJUNCTIONS: [")
 for junction in junctions:
-    print(junction.id)
+    print("\tJunction {")
+    print(f"\t\tJunction ID: {junction.id}")
+    print("\t}\n")
+print("]")
     
 #roads2 = odr_map.get_roads()

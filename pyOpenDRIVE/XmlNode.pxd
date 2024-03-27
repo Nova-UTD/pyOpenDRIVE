@@ -66,15 +66,15 @@ cdef class Py_xml_node:
 
 cdef class PyXmlNode:
     @staticmethod
-    cdef inline PyXmlNode wrap(const XmlNode& c_obj):
+    cdef inline PyXmlNode wrap_node(const XmlNode& c_obj):
         temp = PyXmlNode()
-        temp.c_self = make_shared[XmlNode](c_obj)
+        temp.node_ptr = make_shared[XmlNode](c_obj)
         return temp
 
-    cdef inline XmlNode* unwrap(this):
-        return this.c_self.get()
+    cdef inline XmlNode* unwrap_node(this):
+        return this.node_ptr.get()
 
-    cdef shared_ptr[XmlNode] c_self
+    cdef shared_ptr[XmlNode] node_ptr
 
 cdef class Py_xml_document(Py_xml_node):
     @staticmethod

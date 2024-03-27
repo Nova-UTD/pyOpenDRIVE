@@ -1,10 +1,21 @@
 # distutils: language=c++
 
 from pyOpenDRIVE cimport Road
+
 from pyOpenDRIVE.CubicSpline import PyCubicSpline
 from pyOpenDRIVE.CubicSpline cimport PyCubicSpline
+
 from pyOpenDRIVE.RefLine import PyRefLine
 from pyOpenDRIVE.RefLine cimport PyRefLine
+
+from pyOpenDRIVE.LaneSection import PyLaneSection
+from pyOpenDRIVE.LaneSection cimport PyLaneSection
+
+from pyOpenDRIVE.RoadObject import PyRoadObject
+from pyOpenDRIVE.RoadObject cimport PyRoadObject
+
+from pyOpenDRIVE.RoadSignal import PyRoadSignal
+from pyOpenDRIVE.RoadSignal cimport PyRoadSignal
 
 cdef class PyCrossfall:
     def __cinit__(self):
@@ -57,6 +68,30 @@ cdef class PyRoad:
     def __cinit__(self, string id = "", double length = 0, string junction = "", string name = "", bool left_hand_traffic = False):
         if id != "":
             self.c_self = make_shared[Road](id, length, junction, name, left_hand_traffic)
+
+    def get_lanesections(self):
+        out_arr = []
+        cdef vector[LaneSection] c_objs = self.unwrap().get_lanesections()
+        for i in range(c_objs.size()):
+            out_val = PyLaneSection.wrap(c_objs[i])
+            out_arr.append(out_val)
+        return out_arr
+
+    def get_road_objects(self):
+        out_arr = []
+        cdef vector[RoadObject] c_objs = self.unwrap().get_road_objects()
+        for i in range(c_objs.size()):
+            out_val = PyRoadObject.wrap(c_objs[i])
+            out_arr.append(out_val)
+        return out_arr
+
+    def get_road_signals(self):
+        out_arr = []
+        cdef vector[RoadSignal] c_objs = self.unwrap().get_road_signals()
+        for i in range(c_objs.size()):
+            out_val = PyRoadSignal.wrap(c_objs[i])
+            out_arr.append(out_val)
+        return out_arr
 
     @property
     def length(self):

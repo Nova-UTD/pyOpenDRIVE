@@ -16,8 +16,8 @@ from pyOpenDRIVE.RoadNetworkMesh cimport PyRoadNetworkMesh
 from pyOpenDRIVE.RoutingGraph import PyRoutingGraph
 from pyOpenDRIVE.RoutingGraph cimport PyRoutingGraph
 
-from pyOpenDRIVE.XmlNode import PyXmlDocument
-from pyOpenDRIVE.XmlNode cimport PyXmlDocument
+from pyOpenDRIVE.XmlNode import Py_xml_document
+from pyOpenDRIVE.XmlNode cimport Py_xml_document
 
 cdef class PyOpenDriveMap:
     def __cinit__(self, const string& xodr_file, bool center_map = False, bool with_road_objects = True, bool with_lateral_profile = True, bool with_lane_height = True, bool abs_z_for_for_local_road_obj_outline = False, bool fix_spiral_edge_cases = True, bool with_road_signals = True):
@@ -63,7 +63,7 @@ cdef class PyOpenDriveMap:
 
     @property
     def xml_doc(self):
-        return PyXmlDocument.wrap(self.unwrap().xml_doc)
+        return Py_xml_document.wrap(self.unwrap().xml_doc)
     
     @property
     def id_to_road(self):

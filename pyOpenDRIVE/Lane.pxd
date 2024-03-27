@@ -48,4 +48,13 @@ cdef extern from "Lane.h" namespace "odr":
         set[RoadMarkGroup] roadmark_groups
 
 cdef class PyLane:
+    @staticmethod
+    cdef inline PyLane wrap(const Lane& c_obj):
+        temp = PyLane()
+        temp.c_self = make_shared[Lane](c_obj)
+        return temp
+
+    cdef inline Lane* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[Lane] c_self

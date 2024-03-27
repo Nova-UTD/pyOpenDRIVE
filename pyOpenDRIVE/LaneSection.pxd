@@ -24,4 +24,13 @@ cdef extern from "LaneSection.h" namespace "odr":
         map[int, Lane] id_to_lane
 
 cdef class PyLaneSection:
+    @staticmethod
+    cdef inline PyLaneSection wrap(const LaneSection& c_obj):
+        temp = PyLaneSection()
+        temp.c_self = make_shared[LaneSection](c_obj)
+        return temp
+
+    cdef inline LaneSection* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[LaneSection] c_self

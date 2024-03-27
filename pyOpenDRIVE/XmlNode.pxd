@@ -52,6 +52,18 @@ cdef extern from "XmlNode.h" namespace "odr":
     cdef cppclass XmlNode:
         xml_node node "xml_node"
 
+cdef class Py_xml_node:
+    @staticmethod
+    cdef inline Py_xml_node wrap_node(const xml_node& c_obj):
+        temp = Py_xml_node()
+        temp.node_ptr = make_shared[xml_node](c_obj)
+        return temp
+
+    cdef inline xml_node* unwrap_node(this):
+        return this.node_ptr.get()
+
+    cdef shared_ptr[xml_node] node_ptr
+
 cdef class PyXmlNode:
     @staticmethod
     cdef inline PyXmlNode wrap(const XmlNode& c_obj):
@@ -64,10 +76,10 @@ cdef class PyXmlNode:
 
     cdef shared_ptr[XmlNode] c_self
 
-cdef class PyXmlDocument:
+cdef class Py_xml_document(Py_xml_node):
     @staticmethod
-    cdef inline PyXmlDocument wrap(const xml_document& c_obj):
-        temp = PyXmlDocument()
+    cdef inline Py_xml_document wrap(const xml_document& c_obj):
+        temp = Py_xml_document()
         temp.c_self = make_shared[xml_document]()
         temp.unwrap().reset(c_obj)
         return temp

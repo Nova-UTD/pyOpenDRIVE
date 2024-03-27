@@ -44,4 +44,13 @@ cdef extern from "RoadSignal.h" namespace "odr":
         vector[LaneValidityRecord] lane_validities
 
 cdef class PyRoadSignal:
+    @staticmethod
+    cdef inline PyRoadSignal wrap(const RoadSignal& c_obj):
+        temp = PyRoadSignal()
+        temp.c_self = make_shared[RoadSignal](c_obj)
+        return temp
+
+    cdef inline RoadSignal* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[RoadSignal] c_self

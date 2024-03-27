@@ -2,11 +2,19 @@
 
 from pyOpenDRIVE cimport XmlNode
 
+cdef class Py_xml_node:
+    def __cinit__(self):
+        self.node_ptr = make_shared[xml_node]()
+
 cdef class PyXmlNode:
     def __cinit__(self):
         self.c_self = make_shared[XmlNode]()
 
-cdef class PyXmlDocument:
+    @property
+    def xml_node(self):
+        return Py_xml_node.wrap_node(self.unwrap().node)
+
+cdef class Py_xml_document(Py_xml_node):
     def __cinit__(self):
         self.c_self = make_shared[xml_document]()
 

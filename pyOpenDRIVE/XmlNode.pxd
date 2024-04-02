@@ -52,6 +52,7 @@ cdef extern from "XmlNode.h" namespace "odr":
     cdef cppclass XmlNode:
         xml_node node "xml_node"
 
+# Wrapper for raw pugixml xml_node type
 cdef class Py_xml_node:
     @staticmethod
     cdef inline Py_xml_node wrap_node(const xml_node& c_obj):
@@ -64,6 +65,7 @@ cdef class Py_xml_node:
 
     cdef shared_ptr[xml_node] node_ptr
 
+# Wrapper for pyOpenDRIVE XmlNode type which is wrapper for pugixml xml_node
 cdef class PyXmlNode:
     @staticmethod
     cdef inline PyXmlNode wrap_node(const XmlNode& c_obj):
@@ -76,6 +78,7 @@ cdef class PyXmlNode:
 
     cdef shared_ptr[XmlNode] node_ptr
 
+# Wrapper for raw pugixml xml_document type
 cdef class Py_xml_document(Py_xml_node):
     @staticmethod
     cdef inline Py_xml_document wrap(const xml_document& c_obj):

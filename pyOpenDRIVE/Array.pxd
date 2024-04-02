@@ -33,13 +33,13 @@ cdef extern from "<array>" namespace "std":
         size_type max_size() const
 
         reference operator[](size_type n)
-        const_reference operator[](size_type n) const
+        #const_reference operator[](size_type n) const
         reference at(size_type n)
-        const_reference at(size_type n) const
+        #const_reference at(size_type n) const
         reference front()
-        const_reference front() const
+        #const_reference front() const
         reference back()
-        const_reference back() const
+        #const_reference back() const
 
         pointer data()
-        const_pointer data() const
+        #const_pointer data() const

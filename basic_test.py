@@ -13,6 +13,7 @@ for road in roads:
     lanesections: list[PyLaneSection] = road.get_lanesections()
     print("\tRoad {")
     print(f"\t\tRoad ID: {road.id}")
+    print(f"\t\tRoad XYZ: {road.get_xyz(0, 0, 0).array}")
     print("\t\tLaneSections {")
     for lanesec in lanesections:
         print(f"\t\t\tAssoc. Road ID: {lanesec.road_id}; S0: {lanesec.s0}; # Lanes: {len(lanesec.id_to_lane.keys())}")

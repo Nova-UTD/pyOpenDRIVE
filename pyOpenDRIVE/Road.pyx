@@ -17,6 +17,10 @@ from pyOpenDRIVE.RoadObject cimport PyRoadObject
 from pyOpenDRIVE.RoadSignal import PyRoadSignal
 from pyOpenDRIVE.RoadSignal cimport PyRoadSignal
 
+from pyOpenDRIVE.Math cimport Vec3D
+from pyOpenDRIVE.Math import PyVec3D
+from pyOpenDRIVE.Math cimport PyVec3D
+
 cdef class PyCrossfall:
     def __cinit__(self):
         self.c_self = make_shared[Crossfall]()
@@ -92,6 +96,31 @@ cdef class PyRoad:
             out_val = PyRoadSignal.wrap(c_objs[i])
             out_arr.append(out_val)
         return out_arr
+
+    def get_lanesection_s0(self, const double s):
+        return self.unwrap().get_lanesection_s0(s)
+
+    def get_lanesection(self, const double s):
+        return PyLaneSection(self.id, self.unwrap().get_lanesection_s0(s))
+
+    def get_lanesection_end(self, PyLaneSection lanesection):
+        return self.unwrap().get_lanesection_end(lanesection.unwrap()[0])
+
+    def get_lanesection_end(self, const double lanesection_s0):
+        return self.unwrap().get_lanesection_end(lanesection_s0)
+
+    def get_lanesection_length(self, PyLaneSection lanesection):
+        return self.unwrap().get_lanesection_length(lanesection.unwrap()[0])
+
+    def get_lanesection_length(self, const double lanesection_s0):
+        return self.unwrap().get_lanesection_length(lanesection_s0)
+
+    def get_xyz(self, const double s, const double t, const double h, PyVec3D e_s = None, PyVec3D e_t = None, PyVec3D e_h = None):
+        return PyVec3D.wrap(self.unwrap().get_xyz(s, t, h, e_s.unwrap() if e_s != None else NULL, e_t.unwrap() if e_t != None else NULL, e_h.unwrap() if e_h != None else NULL))
+
+    def get_surface_pt(self, double s, const double t, PyVec3D vn = None):
+        return PyVec3D.wrap(self.unwrap().get_surface_pt(s, t, vn.unwrap() if vn != None else NULL))
+
 
     @property
     def length(self):

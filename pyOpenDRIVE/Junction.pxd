@@ -10,7 +10,7 @@ from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
 
-from pyOpenDRIVE.XmlNode cimport XmlNode
+from pyOpenDRIVE.XmlNode cimport XmlNode, PyXmlNode
 
 cdef extern from "<cstdint>" namespace "std":
     cdef cppclass uint32_t
@@ -61,7 +61,7 @@ cdef extern from "Junction.h" namespace "odr":
         map[string, JunctionController] id_to_controller
         set[JunctionPriority] priorities
 
-cdef class PyJunction:
+cdef class PyJunction(PyXmlNode):
     @staticmethod
     cdef inline PyJunction wrap(const Junction& c_obj):
         temp = PyJunction()
@@ -72,3 +72,15 @@ cdef class PyJunction:
         return this.c_self.get()
         
     cdef shared_ptr[Junction] c_self
+
+cdef class PyJunctionConnection:
+    @staticmethod
+    cdef inline PyJunctionConnection wrap(const JunctionConnection& c_obj):
+        temp = PyJunctionConnection()
+        temp.c_self = make_shared[JunctionConnection](c_obj)
+        return temp
+
+    cdef inline JunctionConnection* unwrap(this):
+        return this.c_self.get()
+        
+    cdef shared_ptr[JunctionConnection] c_self

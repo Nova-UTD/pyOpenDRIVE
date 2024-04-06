@@ -65,4 +65,13 @@ cdef extern from "RoadMark.h" namespace "odr":
         string type
 
 cdef class PyRoadMark:
+    @staticmethod
+    cdef inline PyRoadMark wrap(const RoadMark& c_obj):
+        temp = PyRoadMark()
+        temp.c_self = make_shared[RoadMark](c_obj)
+        return temp
+
+    cdef inline RoadMark* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[RoadMark] c_self

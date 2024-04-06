@@ -1,5 +1,7 @@
 # distutils: language=c++
 
+from cython.operator cimport dereference, postincrement
+
 from pyOpenDRIVE cimport Road
 
 from pyOpenDRIVE.CubicSpline import PyCubicSpline
@@ -20,6 +22,18 @@ from pyOpenDRIVE.RoadSignal cimport PyRoadSignal
 from pyOpenDRIVE.Math cimport Vec3D
 from pyOpenDRIVE.Math import PyVec3D
 from pyOpenDRIVE.Math cimport PyVec3D
+
+from pyOpenDRIVE.Math import PyLine3D
+from pyOpenDRIVE.Math cimport PyLine3D
+
+from pyOpenDRIVE.Mesh import PyMesh3D
+from pyOpenDRIVE.Mesh cimport PyMesh3D
+
+from pyOpenDRIVE.Lane import PyLane
+from pyOpenDRIVE.Lane cimport PyLane
+
+from pyOpenDRIVE.RoadMark import PyRoadMark
+from pyOpenDRIVE.RoadMark cimport PyRoadMark
 
 cdef class PyCrossfall:
     def __cinit__(self):
@@ -68,6 +82,19 @@ cdef class PyRoadNeighbor:
     def direction(self):
         return self.unwrap().direction
 
+cdef class PySpeedRecord:
+    def __cinit__(self, string max = "", string unit = ""):
+        if id != "":
+            self.c_self = make_shared[SpeedRecord](max, unit)
+
+    @property
+    def max(self):
+        return self.unwrap().max
+
+    @property
+    def unit(self):
+        return self.unwrap().unit
+
 cdef class PyRoad:
     def __cinit__(self, string id = "", double length = 0, string junction = "", string name = "", bool left_hand_traffic = False):
         if id != "":
@@ -103,17 +130,17 @@ cdef class PyRoad:
     def get_lanesection(self, const double s):
         return PyLaneSection(self.id, self.unwrap().get_lanesection_s0(s))
 
-    def get_lanesection_end(self, PyLaneSection lanesection):
-        return self.unwrap().get_lanesection_end(lanesection.unwrap()[0])
+    def get_lanesection_end(self, lanesection):
+        if isinstance(lanesection, PyLaneSection):
+            return self.unwrap().get_lanesection_end((<PyLaneSection>lanesection).unwrap()[0])
+        else:
+            return self.unwrap().get_lanesection_end(<double>lanesection)    
 
-    def get_lanesection_end(self, const double lanesection_s0):
-        return self.unwrap().get_lanesection_end(lanesection_s0)
-
-    def get_lanesection_length(self, PyLaneSection lanesection):
-        return self.unwrap().get_lanesection_length(lanesection.unwrap()[0])
-
-    def get_lanesection_length(self, const double lanesection_s0):
-        return self.unwrap().get_lanesection_length(lanesection_s0)
+    def get_lanesection_length(self, lanesection):
+        if isinstance(lanesection, PyLaneSection):
+            return self.unwrap().get_lanesection_length((<PyLaneSection>lanesection).unwrap()[0])
+        else:
+            return self.unwrap().get_lanesection_length(<double>lanesection)
 
     def get_xyz(self, const double s, const double t, const double h, PyVec3D e_s = None, PyVec3D e_t = None, PyVec3D e_h = None):
         return PyVec3D.wrap(self.unwrap().get_xyz(s, t, h, e_s.unwrap() if e_s != None else NULL, e_t.unwrap() if e_t != None else NULL, e_h.unwrap() if e_h != None else NULL))
@@ -121,6 +148,35 @@ cdef class PyRoad:
     def get_surface_pt(self, double s, const double t, PyVec3D vn = None):
         return PyVec3D.wrap(self.unwrap().get_surface_pt(s, t, vn.unwrap() if vn != None else NULL))
 
+    def get_lane_border_line(self, PyLane lane, const double s_start = 0, const double s_end = 0, const double eps = 0, const bool outer = True):
+        if s_start != 0 and s_end != 0:
+            return PyLine3D.wrap(self.unwrap().get_lane_border_line(lane.unwrap()[0], s_start, s_end, eps, outer))
+        else:
+            return PyLine3D.wrap(self.unwrap().get_lane_border_line(lane.unwrap()[0], eps, outer))
+
+    def get_lane_mesh(self, PyLane lane, const double s_start = 0, const double s_end = 0, const double eps = 0, outline_indices = []):
+        cdef vector[uint32_t] c_vec
+        for i in range(len(outline_indices)):
+            c_vec.push_back(<uint32_t>outline_indices[i])
+        if s_start != 0 and s_end != 0:
+            return PyMesh3D.wrap(self.unwrap().get_lane_mesh(lane.unwrap()[0], s_start, s_end, eps, &c_vec))
+        else:
+            return PyMesh3D.wrap(self.unwrap().get_lane_mesh(lane.unwrap()[0], eps, &c_vec))     
+
+    def get_roadmark_mesh(self, PyLane lane, PyRoadMark roadmark, const double eps):
+        return PyMesh3D.wrap(self.unwrap().get_roadmark_mesh(lane.unwrap()[0], roadmark.unwrap()[0], eps))
+
+    def get_road_signal_mesh(self, PyRoadSignal road_signal):
+        return PyMesh3D.wrap(self.unwrap().get_road_signal_mesh(road_signal.unwrap()[0]))
+
+    def get_road_object_mesh(self, PyRoadObject road_object, const double eps):
+        return PyMesh3D.wrap(self.unwrap().get_road_object_mesh(road_object.unwrap()[0], eps))
+
+    def approximate_lane_border_linear(self, PyLane lane, const double s_start = 0, const double s_end = 0, const double eps = 0, const bool outer = True):
+        if s_start != 0 and s_end != 0:
+            return self.unwrap().approximate_lane_border_linear(lane.unwrap()[0], s_start, s_end, eps, outer)
+        else:
+            return self.unwrap().approximate_lane_border_linear(lane.unwrap()[0], eps, outer)
 
     @property
     def length(self):
@@ -174,3 +230,53 @@ cdef class PyRoad:
     @property
     def ref_line(self):
         return PyRefLine.wrap(self.unwrap().ref_line)
+
+    @property
+    def s_to_lanesection(self):
+        out_dict = {}
+        cdef map[double, LaneSection] c_map = self.unwrap().s_to_lanesection
+        cdef map[double, LaneSection].iterator iter = c_map.begin()
+        while iter != c_map.end():
+            out_dict[dereference(iter).first] = PyLaneSection.wrap(dereference(iter).second)
+            postincrement(iter)
+        return out_dict
+
+    @property
+    def s_to_type(self):
+        out_dict = {}
+        cdef map[double, string] c_map = self.unwrap().s_to_type
+        cdef map[double, string].iterator iter = c_map.begin()
+        while iter != c_map.end():
+            out_dict[dereference(iter).first] = dereference(iter).second
+            postincrement(iter)
+        return out_dict
+
+    @property
+    def s_to_speed(self):
+        out_dict = {}
+        cdef map[double, SpeedRecord] c_map = self.unwrap().s_to_speed
+        cdef map[double, SpeedRecord].iterator iter = c_map.begin()
+        while iter != c_map.end():
+            out_dict[dereference(iter).first] = PySpeedRecord.wrap(dereference(iter).second)
+            postincrement(iter)
+        return out_dict
+
+    @property
+    def id_to_object(self):
+        out_dict = {}
+        cdef map[string, RoadObject] c_map = self.unwrap().id_to_object
+        cdef map[string, RoadObject].iterator iter = c_map.begin()
+        while iter != c_map.end():
+            out_dict[dereference(iter).first] = PyRoadObject.wrap(dereference(iter).second)
+            postincrement(iter)
+        return out_dict
+
+    @property
+    def id_to_signal(self):
+        out_dict = {}
+        cdef map[string, RoadSignal] c_map = self.unwrap().id_to_signal
+        cdef map[string, RoadSignal].iterator iter = c_map.begin()
+        while iter != c_map.end():
+            out_dict[dereference(iter).first] = PyRoadSignal.wrap(dereference(iter).second)
+            postincrement(iter)
+        return out_dict

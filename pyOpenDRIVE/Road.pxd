@@ -83,18 +83,18 @@ cdef extern from "Road.h" namespace "odr":
         Vec3D get_xyz(const double s, const double t, const double h, Vec3D* e_s, Vec3D* e_t, Vec3D* e_h) const
         Vec3D get_surface_pt(double s, const double t, Vec3D* vn) const
 
-        Line3D get_lane_border_line(const Lane& lane, const double s_start, const double s_end, const double eps, const bool outer = true) const
-        Line3D get_lane_border_line(const Lane& lane, const double eps, const bool outer = true) const
+        Line3D get_lane_border_line(const Lane& lane, const double s_start, const double s_end, const double eps, const bool outer) const
+        Line3D get_lane_border_line(const Lane& lane, const double eps, const bool outer) const
 
-        Mesh3D get_lane_mesh(const Lane& lane, const double s_start, const double s_end, const double eps, vector[uint32_t]* outline_indices = nullptr) const
-        Mesh3D get_lane_mesh(const Lane& lane, const double eps, vector[uint32_t]* outline_indices = nullptr) const
+        Mesh3D get_lane_mesh(const Lane& lane, const double s_start, const double s_end, const double eps, vector[uint32_t]* outline_indices) const
+        Mesh3D get_lane_mesh(const Lane& lane, const double eps, vector[uint32_t]* outline_indices) const
 
         Mesh3D get_roadmark_mesh(const Lane& lane, const RoadMark& roadmark, const double eps) const
         Mesh3D get_road_signal_mesh(const RoadSignal& road_signal) const
         Mesh3D get_road_object_mesh(const RoadObject& road_object, const double eps) const
 
-        set[double] approximate_lane_border_linear(const Lane& lane, const double s_start, const double s_end, const double eps, const bool outer = true) const
-        set[double] approximate_lane_border_linear(const Lane& lane, const double eps, const bool outer = true) const
+        set[double] approximate_lane_border_linear(const Lane& lane, const double s_start, const double s_end, const double eps, const bool outer) const
+        set[double] approximate_lane_border_linear(const Lane& lane, const double eps, const bool outer) const
 
         double length
         string id
@@ -152,6 +152,18 @@ cdef class PyRoadNeighbor:
         return this.c_self.get()
 
     cdef shared_ptr[RoadNeighbor] c_self
+
+cdef class PySpeedRecord:
+    @staticmethod
+    cdef inline PySpeedRecord wrap(const SpeedRecord& c_obj):
+        temp = PySpeedRecord()
+        temp.c_self = make_shared[SpeedRecord](c_obj)
+        return temp
+
+    cdef inline SpeedRecord* unwrap(this):
+        return this.c_self.get()
+
+    cdef shared_ptr[SpeedRecord] c_self
 
 cdef class PyRoad:
     @staticmethod

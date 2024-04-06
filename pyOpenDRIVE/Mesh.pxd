@@ -29,4 +29,13 @@ cdef extern from "Mesh.h" namespace "odr":
         vector[Vec2D] st_coordinates
 
 cdef class PyMesh3D:
+    @staticmethod
+    cdef inline PyMesh3D wrap(const Mesh3D& c_obj):
+        temp = PyMesh3D()
+        temp.c_self = make_shared[Mesh3D](c_obj)
+        return temp
+
+    cdef inline Mesh3D* unwrap(this):
+        return this.c_self.get()
+
     cdef shared_ptr[Mesh3D] c_self

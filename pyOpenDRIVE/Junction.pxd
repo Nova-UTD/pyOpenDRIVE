@@ -5,7 +5,7 @@ cdef extern from "../src/Junction.cpp":
 
 from libcpp.vector cimport vector
 from libcpp.map cimport map
-from libcpp.set cimport set
+from libcpp.set cimport set as libcpp_set # Alias to prevent name collision with Python's set()
 from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
@@ -20,7 +20,7 @@ cdef extern from "Junction.h" namespace "odr":
     cdef cppclass JunctionLaneLink:
         JunctionLaneLink(int f, int to) except +
 
-        int f "from" # Workaround here, since having a field or variable named "from" causes cython to throw syntax errors...
+        int frm "from" # Workaround here, since having a field or variable named "from" causes cython to throw syntax errors...
         int to
 
     cdef cppclass JunctionConnection:
@@ -36,7 +36,7 @@ cdef extern from "Junction.h" namespace "odr":
         string connecting_road
         ContactPoint contact_point
 
-        set[JunctionLaneLink] lane_links
+        libcpp_set[JunctionLaneLink] lane_links
 
     cdef cppclass JunctionPriority:
         JunctionPriority(string high, string low) except +
@@ -59,7 +59,7 @@ cdef extern from "Junction.h" namespace "odr":
 
         map[string, JunctionConnection] id_to_connection
         map[string, JunctionController] id_to_controller
-        set[JunctionPriority] priorities
+        libcpp_set[JunctionPriority] priorities
 
 cdef class PyJunction(PyXmlNode):
     @staticmethod
@@ -73,6 +73,18 @@ cdef class PyJunction(PyXmlNode):
         
     cdef shared_ptr[Junction] c_self
 
+cdef class PyJunctionLaneLink:
+    @staticmethod
+    cdef inline PyJunctionLaneLink wrap(const JunctionLaneLink& c_obj):
+        temp = PyJunctionLaneLink()
+        temp.c_self = make_shared[JunctionLaneLink](c_obj)
+        return temp
+
+    cdef inline JunctionLaneLink* unwrap(this):
+        return this.c_self.get()
+        
+    cdef shared_ptr[JunctionLaneLink] c_self
+
 cdef class PyJunctionConnection:
     @staticmethod
     cdef inline PyJunctionConnection wrap(const JunctionConnection& c_obj):
@@ -84,3 +96,27 @@ cdef class PyJunctionConnection:
         return this.c_self.get()
         
     cdef shared_ptr[JunctionConnection] c_self
+
+cdef class PyJunctionPriority:
+    @staticmethod
+    cdef inline PyJunctionPriority wrap(const JunctionPriority& c_obj):
+        temp = PyJunctionPriority()
+        temp.c_self = make_shared[JunctionPriority](c_obj)
+        return temp
+
+    cdef inline JunctionPriority* unwrap(this):
+        return this.c_self.get()
+        
+    cdef shared_ptr[JunctionPriority] c_self
+
+cdef class PyJunctionController:
+    @staticmethod
+    cdef inline PyJunctionController wrap(const JunctionController& c_obj):
+        temp = PyJunctionController()
+        temp.c_self = make_shared[JunctionController](c_obj)
+        return temp
+
+    cdef inline JunctionController* unwrap(this):
+        return this.c_self.get()
+        
+    cdef shared_ptr[JunctionController] c_self

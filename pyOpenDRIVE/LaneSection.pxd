@@ -16,6 +16,8 @@ cdef extern from "LaneSection.h" namespace "odr":
     cdef cppclass LaneSection:
         LaneSection(string road_id, double s0) except +
 
+        vector[Lane] get_lanes() const
+
         int  get_lane_id(const double s, const double t) const
         Lane get_lane(const double s, const double t) const
 

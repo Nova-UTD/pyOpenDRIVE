@@ -5,7 +5,7 @@ cdef extern from "../src/Lane.cpp":
 
 from libcpp.vector cimport vector
 from libcpp.map cimport map
-from libcpp.set cimport set
+from libcpp.set cimport set as libcpp_set # Alias to prevent name collision with Python's set()
 from libcpp.string cimport string
 from libcpp cimport bool
 from libcpp.memory cimport make_shared, shared_ptr
@@ -15,13 +15,13 @@ from pyOpenDRIVE.RoadMark cimport RoadMark, RoadMarkGroup
 
 cdef extern from "Lane.h" namespace "odr":
     cdef cppclass HeightOffset:
-        HeightOffset(double inner, double outer)
+        HeightOffset(double inner, double outer) except +
 
         double inner
         double outer
 
     cdef cppclass LaneKey:
-        LaneKey(string road_id, double lanesection_s0, int lane_id)
+        LaneKey(string road_id, double lanesection_s0, int lane_id) except +
         string to_string() const
 
         string road_id
@@ -45,7 +45,7 @@ cdef extern from "Lane.h" namespace "odr":
         CubicSpline inner_border
 
         map[double, HeightOffset] s_to_height_offset
-        set[RoadMarkGroup] roadmark_groups
+        libcpp_set[RoadMarkGroup] roadmark_groups
 
 cdef class PyLane:
     @staticmethod
@@ -58,3 +58,27 @@ cdef class PyLane:
         return this.c_self.get()
 
     cdef shared_ptr[Lane] c_self
+
+cdef class PyHeightOffset:
+    @staticmethod
+    cdef inline PyHeightOffset wrap(const HeightOffset& c_obj):
+        temp = PyHeightOffset()
+        temp.c_self = make_shared[HeightOffset](c_obj)
+        return temp
+
+    cdef inline HeightOffset* unwrap(this):
+        return this.c_self.get()
+
+    cdef shared_ptr[HeightOffset] c_self
+
+cdef class PyLaneKey:
+    @staticmethod
+    cdef inline PyLaneKey wrap(const LaneKey& c_obj):
+        temp = PyLaneKey()
+        temp.c_self = make_shared[LaneKey](c_obj)
+        return temp
+
+    cdef inline LaneKey* unwrap(this):
+        return this.c_self.get()
+
+    cdef shared_ptr[LaneKey] c_self
